@@ -7,10 +7,14 @@
   <meta name="description" content="Portfolio of Layanthi Christine Joseph, BICT undergraduate, aspiring QA engineer and UI/UX designer." />
   <meta name="theme-color" content="#050b14" />
 
+  <!-- how the link looks when it is shared (LinkedIn, WhatsApp, etc.) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Layanthi Christine Joseph | Portfolio" />
   <meta property="og:description" content="BICT undergraduate, aspiring QA engineer and UI/UX designer. Projects, skills and certifications." />
+  <!-- EDIT HERE (after launch): to show a preview picture when the link is shared, add
+       <meta property="og:image" content="https://YOUR-SITE-ADDRESS/assets/images/profile.jpeg" /> -->
 
+  <!-- small "LCJ" icon in the browser tab -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050b14'/%3E%3Ctext x='32' y='41' font-family='Arial,sans-serif' font-size='24' font-weight='800' text-anchor='middle' fill='%2322d3ee'%3ELCJ%3C/text%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,13 +24,16 @@
 </head>
 <body>
 
+  <!-- page-load animation (hidden by main.js once the page has loaded) -->
   <div class="loader" id="loader" aria-hidden="true">
     <span class="loader-mark">LCJ</span>
     <span class="loader-bar"></span>
   </div>
 
+  <!-- lets keyboard users jump straight past the menu -->
   <a href="#main" class="skip-link">Skip to content</a>
 
+  <!-- ============ ICON LIBRARY (small icons used by Skills, Certifications, Projects and Contact; not visible) ============ -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <!-- category icons -->
     <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
@@ -115,7 +122,7 @@
 
           <div class="hero-buttons">
             <a href="#projects" class="btn btn-primary">View My Projects</a>
-            <a href="assets/cv/Layanthi_Joseph_SQA_CV.pdf" class="btn btn-outline" download>Download CV</a>
+            <a href="assets/cv/CV sample testing.pdf" class="btn btn-outline" download>Download CV</a>
             <a href="#contact" class="btn btn-outline">Contact Me</a>
           </div>
 
@@ -131,6 +138,7 @@
               </a>
             </li>
             <li>
+              <!-- copies my email address only (it does NOT open a mail app) -->
               <button type="button" class="copy-email" data-email="layanthi.joseph@gmail.com" aria-label="Copy my email address" title="Copy email address">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </button>
@@ -178,6 +186,7 @@
             </p>
           </div>
 
+          <!-- decorative illustration: code window + UI wireframe + QA checklist -->
           <div class="about-visual" aria-hidden="true">
             <svg viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
               <defs>
@@ -263,6 +272,7 @@
               <h3>Pushpadana Girls' College, Kandy</h3>
               <p class="timeline-degree">GCE Advanced Level</p>
 
+              <!-- EDIT HERE: data-src = the A/L certificate image file, data-alt = its description -->
               <button type="button" class="cert-btn"
                 data-cert="al"
                 data-src="assets/certificates/al-certificate.jpeg"
@@ -273,6 +283,8 @@
             </article>
           </li>
 
+          <!-- EDIT HERE: ESOFT Metro Campus (now sits between Pushpadana and Good Shepherd).
+               To move this card in the timeline, cut this whole <li> ... </li> block and paste it above or below another one. -->
           <li class="timeline-item">
             <span class="timeline-dot" aria-hidden="true"></span>
             <article class="timeline-card">
@@ -281,6 +293,7 @@
               <p class="timeline-degree">Assured Diploma in Information Technology (DiTEC)</p>
               <p class="timeline-meta">Pearson Assured programme</p>
 
+              <!-- EDIT HERE: data-src = certificate image, data-src2 = transcript image (shown after the arrow / tab) -->
               <button type="button" class="cert-btn"
                 data-cert="esoft"
                 data-src="assets/certificates/esoft.jpeg"
@@ -302,6 +315,7 @@
               <h3>Good Shepherd Convent, Kandy</h3>
               <p class="timeline-degree">GCE Ordinary Level</p>
 
+              <!-- EDIT HERE: data-src = the O/L certificate image file, data-alt = its description -->
               <button type="button" class="cert-btn"
                 data-cert="ol"
                 data-src="assets/certificates/ol-certificate.jpeg"
@@ -364,6 +378,13 @@
         <div class="skill-stage" id="skillStage" aria-live="polite">
           <h3 class="skill-stage-title" id="skillStageTitle"></h3>
 
+          <!--
+            EDIT HERE: your skills.
+            - To add a skill, copy one <li> line and change the name.
+            - Logo skills use https://cdn.simpleicons.org/NAME/60a5fa  (change NAME to the logo's name from simpleicons.org).
+            - Skills without a logo use a small icon from the icon library at the top of this file: <svg class="skill-icon"><use href="#i-bug"/></svg>
+          -->
+
           <ul class="skill-list" data-panel="programming" hidden>
             <li class="skill-item"><img class="skill-icon" src="https://cdn.simpleicons.org/python/60a5fa" alt="" width="22" height="22" /><span>Python</span></li>
             <li class="skill-item"><img class="skill-icon" src="https://cdn.simpleicons.org/openjdk/60a5fa" alt="" width="22" height="22" /><span>Java</span></li>
@@ -419,6 +440,32 @@
           <p class="section-subtitle">A collection of certifications and courses that reflect my continuous learning and professional development.</p>
         </div>
 
+        <!--
+          EDIT HERE: your certifications. One <article class="cert-card"> block per certificate,
+          shown on the page in the same order as here.
+
+          HOW MANY SHOW FIRST: data-initial="6" on the grid below. The first 6 cards are shown and the rest
+          appear when the visitor clicks "View more certifications". Change the number to show more or fewer.
+
+          For each certificate you can change:
+            - the title: inside <span class="cert-title">
+            - the image: img src (a file in assets/certificates/) and its alt text
+            - data-issuer, data-issued (the issue date), data-expires (leave "" if it never expires),
+              data-workload (course hours, leave "" if none), data-credential-id (leave "" if none),
+              data-skills (topics, separated by commas)
+            - data-verify-note: a short hint shown under the Verify button (leave "" for none)
+            - the Verify link: the href of <a class="cert-verify">.
+              href="#" means there is no online link: the card then shows "View Details" instead.
+            - a digital badge (optional): the <img class="cert-badge"> line inside the card.
+              Put the badge's Credly page in data-badge-link="..." (leave "" until you have it).
+          Any value left as "" is simply not shown in the pop-up.
+
+          To add a certificate: copy a whole <article> ... </article> block.
+          To remove one: delete its whole block.
+          (A card with the word  data-placeholder  would show a yellow "Placeholder" badge. None of yours do.)
+        -->
+        <div class="cert-grid" id="certGrid" data-initial="6">
+
           <!-- 1 -->
           <article class="cert-card"
             data-issuer="Centre for Open &amp; Distance Learning (CODL), University of Moratuwa"
@@ -431,7 +478,7 @@
             data-skills="Software Quality Assurance">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/1.UOM_SQA.jpg" alt="Introduction to Software Quality Assurance certificate, University of Moratuwa" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/1. UOM_SQA.jpg" alt="Introduction to Software Quality Assurance certificate, University of Moratuwa" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -454,7 +501,7 @@
             data-skills="Jira">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/2.JIRA.jpg" alt="Introduction to JIRA certificate, Simplilearn SkillUP" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/2. JIRA.jpg" alt="Introduction to JIRA certificate, Simplilearn SkillUP" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -477,7 +524,7 @@
             data-skills="Python">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/3.UOM_PYTHON.jpg" alt="Python for Beginners certificate, University of Moratuwa" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/3. UOM_PYTHON.jpg" alt="Python for Beginners certificate, University of Moratuwa" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -500,8 +547,8 @@
             data-skills="Cloud Foundations, AWS">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/4.AWS/4.AWS.jpg" alt="AWS Academy Graduate Cloud Foundations Training Badge certificate" width="400" height="300" loading="lazy" decoding="async" />
-                <img class="cert-badge" src="assets/certificates/4.AWS/aws-academy-graduate-cloud-foundations-training-bad.png" alt="AWS Academy Cloud Foundations digital badge" width="54" height="54" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/4. AWS/4. AWS.jpg" alt="AWS Academy Graduate Cloud Foundations Training Badge certificate" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-badge" src="assets/certificates/4. AWS/aws-academy-graduate-cloud-foundations-training-bad.png" alt="AWS Academy Cloud Foundations digital badge" width="54" height="54" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -524,7 +571,7 @@
             data-skills="Critical thinking, Fact-checking, Bias awareness, AI-generated content">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/5.HP.jpg" alt="Critical Thinking in the AI Era certificate, HP LIFE" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/5. Critical Thinking in the AI.jpg" alt="Critical Thinking in the AI Era certificate, HP LIFE" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -547,7 +594,7 @@
             data-skills="Software testing">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/6.CURSA_SOFT_TEST.jpg" alt="Software Testing for Beginners certificate, Cursa" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/6. CURSA_SOFT_TEST.jpg" alt="Software Testing for Beginners certificate, Cursa" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -570,7 +617,7 @@
             data-skills="Test case design, User stories, Test scenarios">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/7.CURSA_TESTCASE.jpg" alt="Test Case Design for Beginners certificate, Cursa" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/7. CURSA_TESTCASE.jpg" alt="Test Case Design for Beginners certificate, Cursa" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -593,7 +640,7 @@
             data-skills="Cisco Packet Tracer">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/8.Getting_Started_with_CPT.jpg" alt="Getting Started with Cisco Packet Tracer certificate, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/8. Getting_Started_with_CPT.jpg" alt="Getting Started with Cisco Packet Tracer certificate, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -616,7 +663,7 @@
             data-skills="Networking, Cisco Packet Tracer">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/9.Exploring_Networking_with_CPT.jpg" alt="Exploring Networking with Cisco Packet Tracer certificate, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/9. Exploring_Networking_with_CPT.jpg" alt="Exploring Networking with Cisco Packet Tracer certificate, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -639,7 +686,7 @@
             data-skills="Internet of Things, Cisco Packet Tracer">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/10.Exploring_IoT_with_CPT.jpg" alt="Exploring Internet of Things with Cisco Packet Tracer certificate, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/10. Exploring_IoT_with_CPT.jpg" alt="Exploring Internet of Things with Cisco Packet Tracer certificate, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -662,8 +709,8 @@
             data-skills="Internet of Things, Digital transformation, Automation and AI, Intent-Based Networking, Network security">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/11.DIGITAL_TRANSFORMATION/IOT_badg.jpg" alt="Introduction to Internet of Things certificate of course completion, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
-                <img class="cert-badge" src="assets/certificates/11.DIGITAL_TRANSFORMATION/introduction-to-iot.png" alt="Cisco Networking Academy Introduction to Internet of Things verified digital badge" width="54" height="54" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/11. DIGITAL TRANSFORMATION/Cisco IOT badge certificate.jpg" alt="Introduction to Internet of Things certificate of course completion, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-badge" src="assets/certificates/11. DIGITAL TRANSFORMATION/introduction-to-iot (1).png" alt="Cisco Networking Academy Introduction to Internet of Things verified digital badge" width="54" height="54" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -686,7 +733,7 @@
             data-skills="IoT, Digital transformation">
             <button type="button" class="cert-card-open">
               <span class="cert-thumb">
-                <img class="cert-img" src="assets/certificates/11.DIGITAL_TRANSFORMATION/IOT.jpg" alt="Introduction to IoT and Digital Transformation certificate, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
+                <img class="cert-img" src="assets/certificates/11. DIGITAL TRANSFORMATION/Introduction to IOT and Digital Transformation.jpg" alt="Introduction to IoT and Digital Transformation certificate, Cisco Networking Academy" width="400" height="300" loading="lazy" decoding="async" />
                 <span class="cert-thumb-fallback" aria-hidden="true">
                   <svg class="thumb-icon"><use href="#i-award"/></svg>
                   Certificate image coming soon
@@ -699,6 +746,7 @@
 
         </div>
 
+        <!-- the "view more" button (its text is written by main.js) -->
         <div class="cert-more-wrap">
           <button type="button" class="btn btn-outline cert-more" id="certMore" aria-expanded="false" aria-controls="certGrid"></button>
         </div>
@@ -720,6 +768,27 @@
           </p>
         </div>
 
+        <!--
+          EDIT HERE: your projects.
+          Each project is one <div class="project-item"> block. What visitors see on the card is the button part
+          (image, title, subtitle). Everything inside <div class="project-detail" hidden> appears
+          only in the pop-up when the project is opened.
+
+          For each project:
+            1. Put its images in assets/images/projects/ and update the img src paths.
+               (cover image = the card image, also used as the large picture at the top of the pop-up)
+            2. Change the title and subtitle.
+            3. Fill in the parts inside project-detail. Delete a part completely if you have nothing for it
+               (for example data-part="screenshots"), and it simply won't show.
+            4. Real links go in the data-part="links" list. A link with href="#" is not shown.
+            5. A card with the word  data-placeholder  on its <article> line shows a yellow "Placeholder" badge.
+               Delete that word when the project is real.
+            6. The coloured box with the QA / UI/UX / other groups is data-part="contribution".
+               Its heading is "My contribution" unless you add data-title="Your own heading" to that line
+               (My Portfolio uses data-title="What I did").
+          To add a project: copy a whole <div class="project-item"> ... </div> block.
+          To remove one: delete its whole block.
+        -->
         <div class="project-grid">
 
           <!-- ===== PROJECT: HARVEST ===== -->
@@ -727,7 +796,7 @@
             <article class="project-card">
               <button type="button" class="project-open" aria-haspopup="dialog">
                 <span class="project-media">
-                  <img src="assets/images/projects/harvest/harvest_main.jpg" alt="HARVEST system interface preview" width="800" height="500" loading="lazy" />
+                  <img src="assets/images/projects/harvest/harvest main.jpg" alt="HARVEST system interface preview" width="800" height="500" loading="lazy" />
                   <span class="project-fallback" aria-hidden="true">
                     <svg class="thumb-icon"><use href="#i-code"/></svg>
                     Project preview coming soon
@@ -800,7 +869,7 @@
             <article class="project-card">
               <button type="button" class="project-open" aria-haspopup="dialog">
                 <span class="project-media">
-                  <img src="assets/images/projects/lexido/lexido_placeholder.jpg" alt="LEXIDO Android task management application preview" width="800" height="500" loading="lazy" />
+                  <img src="assets/images/projects/lexido/lexido placeholder.jpg" alt="LEXIDO Android task management application preview" width="800" height="500" loading="lazy" />
                   <span class="project-fallback" aria-hidden="true">
                     <svg class="thumb-icon"><use href="#i-code"/></svg>
                     Project preview coming soon
@@ -874,18 +943,20 @@
                 <!-- EDIT HERE: LEXIDO screenshots. Save the files in assets/images/projects/.
                      To add one, copy a <li> line. Describe what the screen shows in alt. -->
                 <ul data-part="screenshots">
-                  <li><img src="assets/images/projects/lexido/lex_ui_1.png" alt="LEXIDO app screenshot 1" /></li>
-                  <li><img src="assets/images/projects/lexido/lex_ui_2.png" alt="LEXIDO app screenshot 2" /></li>
-                  <li><img src="assets/images/projects/lexido/lex_ui_3.png" alt="LEXIDO app screenshot 3" /></li>
-                  <li><img src="assets/images/projects/lexido/lex_ui_4.png" alt="LEXIDO app screenshot 4" /></li>
-                  <li><img src="assets/images/projects/lexido/lex_ui_5.png" alt="LEXIDO app screenshot 5" /></li>
-                  <li><img src="assets/images/projects/lexido/lexido_1.png" alt="LEXIDO app screenshot 6" /></li>
-                  <li><img src="assets/images/projects/lexido/lexido_2.png" alt="LEXIDO app screenshot 7" /></li>
-                  <li><img src="assets/images/projects/lexido/lexido_3.png" alt="LEXIDO app screenshot 8" /></li>
-                  <li><img src="assets/images/projects/lexido/lexido_4.png" alt="LEXIDO app screenshot 9" /></li>
-                  <li><img src="assets/images/projects/lexido/lexido_5.png" alt="LEXIDO app screenshot 10" /></li>
+                  <li><img src="assets/images/projects/lexido/lex ui 1.png" alt="LEXIDO app screenshot 1" /></li>
+                  <li><img src="assets/images/projects/lexido/lex ui 2.png" alt="LEXIDO app screenshot 2" /></li>
+                  <li><img src="assets/images/projects/lexido/lex ui 3.png" alt="LEXIDO app screenshot 3" /></li>
+                  <li><img src="assets/images/projects/lexido/lex ui 4.png" alt="LEXIDO app screenshot 4" /></li>
+                  <li><img src="assets/images/projects/lexido/lex ui 5.png" alt="LEXIDO app screenshot 5" /></li>
+                  <li><img src="assets/images/projects/lexido/lexido 1.png" alt="LEXIDO app screenshot 6" /></li>
+                  <li><img src="assets/images/projects/lexido/lexido 2.png" alt="LEXIDO app screenshot 7" /></li>
+                  <li><img src="assets/images/projects/lexido/lexido 3.png" alt="LEXIDO app screenshot 8" /></li>
+                  <li><img src="assets/images/projects/lexido/lexido 4.png" alt="LEXIDO app screenshot 9" /></li>
+                  <li><img src="assets/images/projects/lexido/lexido 5.png" alt="LEXIDO app screenshot 10" /></li>
                 </ul>
 
+                <!-- EDIT HERE: links. Add a demo link the same way:
+                     <li><a href="https://..." data-icon="demo">Live Demo</a></li> -->
                 <ul data-part="links">
                   <li><a href="https://github.com/Layanthi04/Lexido-To-Do-app" data-icon="github">GitHub</a></li>
                 </ul>
@@ -898,7 +969,7 @@
             <article class="project-card">
               <button type="button" class="project-open" aria-haspopup="dialog">
                 <span class="project-media">
-                  <img src="assets/images/projects/myportfolio/portfolio_cover.jpg" alt="My Portfolio website preview" width="800" height="500" loading="lazy" />
+                  <img src="assets/images/projects/myportfolio/portfolio cover.jpg" alt="My Portfolio website preview" width="800" height="500" loading="lazy" />
                   <span class="project-fallback" aria-hidden="true">
                     <svg class="thumb-icon"><use href="#i-code"/></svg>
                     Project preview coming soon
@@ -968,6 +1039,15 @@
                   <li>JavaScript</li>
                 </ul>
 
+                <!-- EDIT HERE: add screenshots and links when you have them:
+                <ul data-part="screenshots">
+                  <li><img src="assets/images/projects/myportfolio/screenshot-1.jpg" alt="My Portfolio screenshot 1" /></li>
+                </ul>
+                <ul data-part="links">
+                  <li><a href="https://github.com/Layanthi04/..." data-icon="github">GitHub</a></li>
+                  <li><a href="https://..." data-icon="demo">Live Site</a></li>
+                </ul>
+                -->
               </div>
             </article>
           </div>
@@ -989,6 +1069,13 @@
               <p class="section-subtitle">I'm always open to learning, collaborating, and exploring new opportunities in Quality Assurance and UI/UX Design.</p>
             </div>
 
+            <!--
+              EDIT HERE: contact links.
+              Email card: a click copies the address, shows a message, and opens a Gmail compose window
+              (in a new tab) with my address already in the "To" field.
+              To change the address, change it in THREE places: in to=... inside href, in data-email, and in the visible text.
+              LinkedIn / GitHub: change the href.
+            -->
             <ul class="contact-methods reveal" style="--d:120ms">
               <li>
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=layanthi.joseph@gmail.com&su=Hello%20Layanthi" target="_blank" rel="noopener noreferrer"
@@ -1015,6 +1102,12 @@
             </ul>
           </div>
 
+          <!--
+            EDIT HERE: the form.
+            data-endpoint = my Formspree form address (messages are sent to my inbox).
+            If it is ever empty, the Send button opens Gmail with the message already written.
+            data-fallback-email = the address used by that fallback.
+          -->
           <form class="contact-form reveal" id="contactForm" style="--d:200ms" novalidate
             data-endpoint="https://formspree.io/f/mdekqeee"
             data-fallback-email="layanthi.joseph@gmail.com">
@@ -1036,6 +1129,8 @@
               <textarea id="cfMessage" name="message" rows="5" placeholder="How can I help, or what would you like to talk about?" required aria-describedby="cfMessageError"></textarea>
               <p class="field-error" id="cfMessageError" hidden></p>
             </div>
+
+            <!-- hidden spam trap: real visitors never see or fill this -->
             <div class="hp" aria-hidden="true">
               <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
             </div>
@@ -1070,6 +1165,7 @@
               </a>
             </li>
             <li>
+              <!-- copies my email address only (it does NOT open a mail app) -->
               <button type="button" class="copy-email" data-email="layanthi.joseph@gmail.com" aria-label="Copy my email address" title="Copy email address">
                 <svg aria-hidden="true"><use href="#i-mail"/></svg>
               </button>
@@ -1124,6 +1220,8 @@
           </div>
           <div class="cert-switch" id="certSwitch" hidden></div>
         </div>
+
+        <!-- right: the details (school name + duration on one row, then qualification) -->
         <div class="cert-details">
           <div class="cert-school-row">
             <p class="cert-school" id="certSchool"></p>
@@ -1159,6 +1257,8 @@
       </div>
     </div>
   </div>
+
+  <!-- ============ CERTIFICATION MODAL (certificate left, details right) ============ -->
   <div class="modal" id="credModal" role="dialog" aria-modal="true" aria-labelledby="credTitle" aria-hidden="true">
     <div class="modal-backdrop"></div>
 
@@ -1216,6 +1316,7 @@
       </button>
 
       <div class="pd-scroll" id="pdScroll">
+        <!-- the project content is placed here by main.js -->
         <div class="pd-body" id="pdBody"></div>
 
         <nav class="pd-nav" aria-label="Project navigation">
@@ -1262,9 +1363,13 @@
       <div class="shot-thumbs" id="shotThumbs"></div>
     </div>
   </div>
+
+  <!-- back to top (appears after scrolling down) -->
   <button type="button" class="to-top" id="toTop" aria-label="Back to top">
     <svg aria-hidden="true"><use href="#i-chev-up"/></svg>
   </button>
+
+  <!-- small pop-up message (used by the copy-email buttons) -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/main.js"></script>

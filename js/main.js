@@ -1,6 +1,8 @@
+/* tells the stylesheet that JavaScript is running (used by the scroll-reveal) */
 document.documentElement.classList.add("js");
 
 
+/* ============ SHARED HELPERS ============ */
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 /* builds an element with optional class name and text */
@@ -156,6 +158,13 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove("show"), 2800);
 }
 
+
+/* ============ COPY EMAIL ============
+   Any element with class "copy-email" and a data-email attribute copies the address
+   and shows a message. The message can be changed with data-toast="..." on the element.
+   - The hero and footer email icons are plain buttons: they only copy.
+   - The Contact section card is also a link that opens Gmail in a new tab:
+     the click is not stopped, so it copies AND opens Gmail. */
 async function copyText(text) {
   try {
     await navigator.clipboard.writeText(text);
@@ -261,7 +270,10 @@ document.addEventListener("keydown", (e) => {
 });
 
 
-/* ============ EDUCATION CERTIFICATE MODAL: DETAILS TEXT ============*/
+/* ============ EDUCATION CERTIFICATE MODAL: DETAILS TEXT ============
+   Edit the written details shown in the pop-up here.
+   (The certificate IMAGE file names are edited in index.html,
+   on each "View Certificate" button: data-src and data-alt.) */
 const certData = {
   al: {
     school: "Pushpadana Girls’ College, Kandy, Sri Lanka",
@@ -587,7 +599,9 @@ skillCats.forEach((cat) => {
 selectCategory("qa");
 
 
-/* ============ CERTIFICATIONS: CARDS + DETAILS POP-UP ============*/
+/* ============ CERTIFICATIONS: CARDS + DETAILS POP-UP ============
+   All certification details are written in index.html, on each card.
+   This code only reads them and shows the pop-up. */
 const credModal = document.getElementById("credModal");
 const credImg = document.getElementById("credImg");
 const credMissing = document.getElementById("credMissing");
@@ -709,7 +723,9 @@ document.querySelectorAll(".cert-card").forEach((card) => {
 });
 
 
-/* ============ CERTIFICATIONS: "VIEW MORE" ============*/
+/* ============ CERTIFICATIONS: "VIEW MORE" ============
+   The first few cards are shown. The number is data-initial on the grid in index.html.
+   The rest stay hidden until the visitor clicks the button. */
 const certGrid = document.getElementById("certGrid");
 const certMore = document.getElementById("certMore");
 const certInitial = parseInt(certGrid.dataset.initial, 10) || 6;
@@ -751,7 +767,9 @@ if (certExtras.length === 0) {
 }
 
 
-/* ============ PROJECTS: GALLERY + DETAIL POP-UP ============*/
+/* ============ PROJECTS: GALLERY + DETAIL POP-UP ============
+   Everything shown about a project is written in index.html, inside that
+   project's card. This code only reads it and builds the pop-up. */
 const projModal = document.getElementById("projModal");
 const projBox = projModal.querySelector(".proj-box");
 const pdScroll = document.getElementById("pdScroll");
@@ -1092,7 +1110,10 @@ shotStage.addEventListener("touchend", (e) => {
 }, { passive: true });
 
 
-/* ============ CONTACT FORM ============*/
+/* ============ CONTACT FORM ============
+   The address the message is sent to is set in index.html: data-endpoint on the <form>.
+   - data-endpoint filled in (the Formspree address): the message is sent from the page.
+   - data-endpoint empty: Gmail opens in a new tab with the message already written. */
 const contactForm = document.getElementById("contactForm");
 const cfSubmit = document.getElementById("cfSubmit");
 const formStatus = document.getElementById("formStatus");
@@ -1207,7 +1228,9 @@ contactForm.addEventListener("submit", async (e) => {
 });
 
 
-/* ============ SCROLL REVEAL ============*/
+/* ============ SCROLL REVEAL ============
+   Anything with class "reveal" fades in and moves up when it scrolls into view.
+   The delay (style="--d:...") makes the heading, subtitle and cards appear one after another. */
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
