@@ -7,14 +7,10 @@
   <meta name="description" content="Portfolio of Layanthi Christine Joseph, BICT undergraduate, aspiring QA engineer and UI/UX designer." />
   <meta name="theme-color" content="#050b14" />
 
-  <!-- how the link looks when it is shared (LinkedIn, WhatsApp, etc.) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Layanthi Christine Joseph | Portfolio" />
   <meta property="og:description" content="BICT undergraduate, aspiring QA engineer and UI/UX designer. Projects, skills and certifications." />
-  <!-- EDIT HERE (after launch): to show a preview picture when the link is shared, add
-       <meta property="og:image" content="https://YOUR-SITE-ADDRESS/assets/images/profile.jpeg" /> -->
 
-  <!-- small "LCJ" icon in the browser tab -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050b14'/%3E%3Ctext x='32' y='41' font-family='Arial,sans-serif' font-size='24' font-weight='800' text-anchor='middle' fill='%2322d3ee'%3ELCJ%3C/text%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,46 +20,39 @@
 </head>
 <body>
 
-  <!-- page-load animation (hidden by main.js once the page has loaded) -->
   <div class="loader" id="loader" aria-hidden="true">
     <span class="loader-mark">LCJ</span>
     <span class="loader-bar"></span>
   </div>
 
-  <!-- lets keyboard users jump straight past the menu -->
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- ============ ICON LIBRARY (small icons used by Skills, Certifications, Projects and Contact; not visible) ============ -->
+  <!-- ICON LIBRARY -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <!-- category icons -->
     <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
     <symbol id="i-qa" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></symbol>
     <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
     <symbol id="i-design" viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.6 7.6"/><circle cx="11" cy="11" r="2"/></symbol>
     <symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
     <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4"/><path d="M12 11.5l-5.2 5.5"/><path d="M12 11.5l5.2 5.5"/></symbol>
-    <!-- testing concept icons -->
     <symbol id="i-test" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><polyline points="9 13 11 15 15 10"/></symbol>
     <symbol id="i-cases" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><polyline points="3.5 6 4.7 7.2 6.5 5"/><polyline points="3.5 12 4.7 13.2 6.5 11"/><polyline points="3.5 18 4.7 19.2 6.5 17"/></symbol>
     <symbol id="i-bug" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="12" rx="4"/><path d="M9 8a3 3 0 0 1 6 0"/><path d="M4 12h4M16 12h4M5 6l3 3M19 6l-3 3M5 19l3-3M19 19l-3-3"/></symbol>
     <symbol id="i-func" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="9" cy="7" r="2.2"/><circle cx="15" cy="17" r="2.2"/></symbol>
     <symbol id="i-nonfunc" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/><circle cx="12" cy="17" r="1"/></symbol>
     <symbol id="i-regress" viewBox="0 0 24 24"><polyline points="20 4 20 9 15 9"/><path d="M19.5 9A8 8 0 1 0 20 13"/></symbol>
-    <!-- certificate icon -->
     <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><polyline points="8.5 14.5 7 22 12 19 17 22 15.5 14.5"/></symbol>
-    <!-- project icons -->
     <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
     <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
     <symbol id="i-chev-l" viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></symbol>
     <symbol id="i-chev-r" viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></symbol>
     <symbol id="i-chev-up" viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></symbol>
-    <!-- contact and footer icons -->
     <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
   </svg>
 
-  <!-- ============ NAVBAR ============ -->
+  <!-- NAVBAR -->
   <header class="navbar" id="navbar">
     <nav class="nav-inner container" aria-label="Main navigation">
       <a href="#home" class="nav-logo">Layanthi Christine Joseph</a>
@@ -88,10 +77,9 @@
 
   <main id="main">
 
-    <!-- ============ HERO ============ -->
+    <!-- HERO -->
     <section id="home" class="section hero">
 
-      <!-- slow-moving decorative shapes -->
       <div class="hero-decor" aria-hidden="true">
         <span class="glow glow-1"></span>
         <span class="glow glow-2"></span>
@@ -138,7 +126,6 @@
               </a>
             </li>
             <li>
-              <!-- copies my email address only (it does NOT open a mail app) -->
               <button type="button" class="copy-email" data-email="layanthi.joseph@gmail.com" aria-label="Copy my email address" title="Copy email address">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </button>
@@ -156,7 +143,7 @@
       </div>
     </section>
 
-    <!-- ============ ABOUT ============ -->
+    <!-- ABOUT -->
     <section id="about" class="section section-filled">
       <div class="container">
         <div class="section-header">
@@ -186,7 +173,6 @@
             </p>
           </div>
 
-          <!-- decorative illustration: code window + UI wireframe + QA checklist -->
           <div class="about-visual" aria-hidden="true">
             <svg viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
               <defs>
@@ -197,7 +183,6 @@
               </defs>
               <circle cx="210" cy="190" r="180" fill="url(#aboutGlow)" />
 
-              <!-- code window -->
               <rect x="30" y="50" width="270" height="190" rx="14" fill="#0b1626" stroke="#1e3a5f" />
               <circle cx="54" cy="72" r="5" fill="#3b82f6" />
               <circle cx="72" cy="72" r="5" fill="#22d3ee" />
@@ -210,7 +195,6 @@
               <rect x="50" y="194" width="150" height="8" rx="4" fill="#1e3a5f" />
               <rect x="50" y="214" width="70" height="8" rx="4" fill="#3b82f6" opacity="0.6" />
 
-              <!-- UI/UX wireframe card -->
               <g class="bob-a">
                 <rect x="250" y="40" width="130" height="125" rx="12" fill="#101e32" stroke="#3b82f6" stroke-opacity="0.6" />
                 <rect x="264" y="54" width="102" height="48" rx="6" fill="#1e3a5f" />
@@ -221,7 +205,6 @@
                 <rect x="264" y="146" width="80" height="6" rx="3" fill="#1e3a5f" />
               </g>
 
-              <!-- QA checklist card -->
               <g class="bob-b">
                 <rect x="190" y="200" width="190" height="130" rx="14" fill="#101e32" stroke="#22d3ee" stroke-opacity="0.5" />
                 <circle cx="216" cy="230" r="9" stroke="#22d3ee" stroke-width="2" />
@@ -234,7 +217,6 @@
                 <rect x="236" y="296" width="100" height="8" rx="4" fill="#1e3a5f" />
               </g>
 
-              <!-- small accents -->
               <circle cx="20" cy="150" r="3" fill="#60a5fa" opacity="0.7" />
               <circle cx="395" cy="190" r="3" fill="#22d3ee" opacity="0.7" />
               <circle cx="120" cy="300" r="3" fill="#3b82f6" opacity="0.7" />
@@ -244,7 +226,7 @@
       </div>
     </section>
 
-    <!-- ============ EDUCATION ============ -->
+    <!-- EDUCATION -->
     <section id="education" class="section section-filled">
       <div class="container">
         <div class="section-header">
@@ -272,7 +254,6 @@
               <h3>Pushpadana Girls' College, Kandy</h3>
               <p class="timeline-degree">GCE Advanced Level</p>
 
-              <!-- EDIT HERE: data-src = the A/L certificate image file, data-alt = its description -->
               <button type="button" class="cert-btn"
                 data-cert="al"
                 data-src="assets/certificates/al-certificate.jpeg"
@@ -283,8 +264,6 @@
             </article>
           </li>
 
-          <!-- EDIT HERE: ESOFT Metro Campus (now sits between Pushpadana and Good Shepherd).
-               To move this card in the timeline, cut this whole <li> ... </li> block and paste it above or below another one. -->
           <li class="timeline-item">
             <span class="timeline-dot" aria-hidden="true"></span>
             <article class="timeline-card">
@@ -293,7 +272,6 @@
               <p class="timeline-degree">Assured Diploma in Information Technology (DiTEC)</p>
               <p class="timeline-meta">Pearson Assured programme</p>
 
-              <!-- EDIT HERE: data-src = certificate image, data-src2 = transcript image (shown after the arrow / tab) -->
               <button type="button" class="cert-btn"
                 data-cert="esoft"
                 data-src="assets/certificates/esoft.jpeg"
@@ -315,7 +293,6 @@
               <h3>Good Shepherd Convent, Kandy</h3>
               <p class="timeline-degree">GCE Ordinary Level</p>
 
-              <!-- EDIT HERE: data-src = the O/L certificate image file, data-alt = its description -->
               <button type="button" class="cert-btn"
                 data-cert="ol"
                 data-src="assets/certificates/ol-certificate.jpeg"
@@ -330,7 +307,7 @@
       </div>
     </section>
 
-    <!-- ============ SKILLS ============ -->
+    <!-- SKILLS -->
     <section id="skills" class="section section-filled">
       <div class="container">
         <div class="section-header">
@@ -339,7 +316,6 @@
           <p class="section-subtitle">Pick a category to see the skills and tools I use in it.</p>
         </div>
 
-        <!-- the six category cards -->
         <div class="skill-cats" role="group" aria-label="Skill categories">
 
           <button type="button" class="skill-cat" data-category="programming" aria-pressed="false" aria-controls="skillStage">
@@ -374,16 +350,8 @@
 
         </div>
 
-        <!-- the area where the selected category's skills swoop in -->
         <div class="skill-stage" id="skillStage" aria-live="polite">
           <h3 class="skill-stage-title" id="skillStageTitle"></h3>
-
-          <!--
-            EDIT HERE: your skills.
-            - To add a skill, copy one <li> line and change the name.
-            - Logo skills use https://cdn.simpleicons.org/NAME/60a5fa  (change NAME to the logo's name from simpleicons.org).
-            - Skills without a logo use a small icon from the icon library at the top of this file: <svg class="skill-icon"><use href="#i-bug"/></svg>
-          -->
 
           <ul class="skill-list" data-panel="programming" hidden>
             <li class="skill-item"><img class="skill-icon" src="https://cdn.simpleicons.org/python/60a5fa" alt="" width="22" height="22" /><span>Python</span></li>
@@ -431,7 +399,7 @@
       </div>
     </section>
 
-    <!-- ============ CERTIFICATIONS ============ -->
+    <!-- CERTIFICATIONS -->
     <section id="certifications" class="section section-filled">
       <div class="container">
         <div class="section-header">
@@ -440,30 +408,6 @@
           <p class="section-subtitle">A collection of certifications and courses that reflect my continuous learning and professional development.</p>
         </div>
 
-        <!--
-          EDIT HERE: your certifications. One <article class="cert-card"> block per certificate,
-          shown on the page in the same order as here.
-
-          HOW MANY SHOW FIRST: data-initial="6" on the grid below. The first 6 cards are shown and the rest
-          appear when the visitor clicks "View more certifications". Change the number to show more or fewer.
-
-          For each certificate you can change:
-            - the title: inside <span class="cert-title">
-            - the image: img src (a file in assets/certificates/) and its alt text
-            - data-issuer, data-issued (the issue date), data-expires (leave "" if it never expires),
-              data-workload (course hours, leave "" if none), data-credential-id (leave "" if none),
-              data-skills (topics, separated by commas)
-            - data-verify-note: a short hint shown under the Verify button (leave "" for none)
-            - the Verify link: the href of <a class="cert-verify">.
-              href="#" means there is no online link: the card then shows "View Details" instead.
-            - a digital badge (optional): the <img class="cert-badge"> line inside the card.
-              Put the badge's Credly page in data-badge-link="..." (leave "" until you have it).
-          Any value left as "" is simply not shown in the pop-up.
-
-          To add a certificate: copy a whole <article> ... </article> block.
-          To remove one: delete its whole block.
-          (A card with the word  data-placeholder  would show a yellow "Placeholder" badge. None of yours do.)
-        -->
         <div class="cert-grid" id="certGrid" data-initial="6">
 
           <!-- 1 -->
@@ -535,7 +479,7 @@
             <a class="cert-verify" href="https://open.uom.lk/verify" target="_blank" rel="noopener noreferrer">Verify Certificate →</a>
           </article>
 
-          <!-- 4 (with badge) -->
+          <!-- 4 -->
           <article class="cert-card"
             data-issuer="AWS Academy"
             data-issued="May 19, 2026"
@@ -697,7 +641,7 @@
             <a class="cert-verify" href="#" target="_blank" rel="noopener noreferrer">Verify Certificate →</a>
           </article>
 
-          <!-- 11 (with badge) -->
+          <!-- 11 -->
           <article class="cert-card"
             data-issuer="Cisco Networking Academy"
             data-issued="April 17, 2026"
@@ -746,14 +690,13 @@
 
         </div>
 
-        <!-- the "view more" button (its text is written by main.js) -->
         <div class="cert-more-wrap">
           <button type="button" class="btn btn-outline cert-more" id="certMore" aria-expanded="false" aria-controls="certGrid"></button>
         </div>
       </div>
     </section>
 
-    <!-- ============ PROJECTS ============ -->
+    <!-- PROJECTS -->
     <section id="projects" class="section section-filled">
       <div class="container">
 
@@ -768,30 +711,9 @@
           </p>
         </div>
 
-        <!--
-          EDIT HERE: your projects.
-          Each project is one <div class="project-item"> block. What visitors see on the card is the button part
-          (image, title, subtitle). Everything inside <div class="project-detail" hidden> appears
-          only in the pop-up when the project is opened.
-
-          For each project:
-            1. Put its images in assets/images/projects/ and update the img src paths.
-               (cover image = the card image, also used as the large picture at the top of the pop-up)
-            2. Change the title and subtitle.
-            3. Fill in the parts inside project-detail. Delete a part completely if you have nothing for it
-               (for example data-part="screenshots"), and it simply won't show.
-            4. Real links go in the data-part="links" list. A link with href="#" is not shown.
-            5. A card with the word  data-placeholder  on its <article> line shows a yellow "Placeholder" badge.
-               Delete that word when the project is real.
-            6. The coloured box with the QA / UI/UX / other groups is data-part="contribution".
-               Its heading is "My contribution" unless you add data-title="Your own heading" to that line
-               (My Portfolio uses data-title="What I did").
-          To add a project: copy a whole <div class="project-item"> ... </div> block.
-          To remove one: delete its whole block.
-        -->
         <div class="project-grid">
 
-          <!-- ===== PROJECT: HARVEST ===== -->
+          <!-- HARVEST -->
           <div class="project-item reveal" style="--d:240ms">
             <article class="project-card">
               <button type="button" class="project-open" aria-haspopup="dialog">
@@ -811,8 +733,7 @@
 
               <div class="project-detail" hidden>
                 <div data-part="overview">
-                  <p>HARVEST is an agricultural subsidy management and crop tracking system designed to support paddy cultivation through land registration, crop tracking, subsidy management, and harvest calculation and forecasting. The project includes mobile applications and web portals to support farmers and relevant agricultural authorities.
-</p>
+                  <p>HARVEST is an agricultural subsidy management and crop tracking system designed to support paddy cultivation through land registration, crop tracking, subsidy management, and harvest calculation and forecasting. The project includes mobile applications and web portals to support farmers and relevant agricultural authorities.</p>
                 </div>
 
                 <div data-part="contribution">
@@ -859,12 +780,15 @@
                   <li><img src="assets/images/projects/harvest/scrn_9.jpg" alt="HARVEST screenshot 10" /></li>
                   <li><img src="assets/images/projects/harvest/scrn_10.jpg" alt="HARVEST screenshot 11" /></li>
                 </ul>
-                <ul data-part="links"><li><a href="https://github.com/HARVEST-LK" data-icon="github">GitHub</a></li></ul>
+
+                <ul data-part="links">
+                  <li><a href="https://github.com/HARVEST-LK" data-icon="github">GitHub</a></li>
+                </ul>
               </div>
             </article>
           </div>
 
-          <!-- ===== PROJECT: LEXIDO ===== -->
+          <!-- LEXIDO -->
           <div class="project-item reveal" style="--d:340ms">
             <article class="project-card">
               <button type="button" class="project-open" aria-haspopup="dialog">
@@ -940,8 +864,6 @@
                   <li>Figma</li>
                 </ul>
 
-                <!-- EDIT HERE: LEXIDO screenshots. Save the files in assets/images/projects/.
-                     To add one, copy a <li> line. Describe what the screen shows in alt. -->
                 <ul data-part="screenshots">
                   <li><img src="assets/images/projects/lexido/lex_ui_1.png" alt="LEXIDO app screenshot 1" /></li>
                   <li><img src="assets/images/projects/lexido/lex_ui_2.png" alt="LEXIDO app screenshot 2" /></li>
@@ -955,8 +877,6 @@
                   <li><img src="assets/images/projects/lexido/lexido_5.png" alt="LEXIDO app screenshot 10" /></li>
                 </ul>
 
-                <!-- EDIT HERE: links. Add a demo link the same way:
-                     <li><a href="https://..." data-icon="demo">Live Demo</a></li> -->
                 <ul data-part="links">
                   <li><a href="https://github.com/Layanthi04/Lexido-To-Do-app" data-icon="github">GitHub</a></li>
                 </ul>
@@ -964,7 +884,7 @@
             </article>
           </div>
 
-          <!-- ===== PROJECT: My Portfolio ===== -->
+          <!-- MY PORTFOLIO -->
           <div class="project-item reveal" style="--d:120ms">
             <article class="project-card">
               <button type="button" class="project-open" aria-haspopup="dialog">
@@ -997,8 +917,6 @@
                   <li>Keyboard-friendly and accessible</li>
                 </ul>
 
-                <!-- EDIT HERE: what I did on this project. data-title is the heading of the box (instead of "My contribution").
-                     Delete any line you did not do, or add your own. -->
                 <div data-part="contribution" data-title="What I did">
                   <div class="pc-group pc-qa">
                     <h5>QA &amp; Testing</h5>
@@ -1038,16 +956,6 @@
                   <li>CSS</li>
                   <li>JavaScript</li>
                 </ul>
-
-                <!-- EDIT HERE: add screenshots and links when you have them:
-                <ul data-part="screenshots">
-                  <li><img src="assets/images/projects/myportfolio/screenshot-1.jpg" alt="My Portfolio screenshot 1" /></li>
-                </ul>
-                <ul data-part="links">
-                  <li><a href="https://github.com/Layanthi04/..." data-icon="github">GitHub</a></li>
-                  <li><a href="https://..." data-icon="demo">Live Site</a></li>
-                </ul>
-                -->
               </div>
             </article>
           </div>
@@ -1056,12 +964,11 @@
       </div>
     </section>
 
-    <!-- ============ CONTACT ============ -->
+    <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container">
         <div class="contact-grid">
 
-          <!-- left: heading + ways to reach me -->
           <div class="contact-info">
             <div class="section-header reveal">
               <span class="section-label">Get In Touch</span>
@@ -1069,13 +976,6 @@
               <p class="section-subtitle">I'm always open to learning, collaborating, and exploring new opportunities in Quality Assurance and UI/UX Design.</p>
             </div>
 
-            <!--
-              EDIT HERE: contact links.
-              Email card: a click copies the address, shows a message, and opens a Gmail compose window
-              (in a new tab) with my address already in the "To" field.
-              To change the address, change it in THREE places: in to=... inside href, in data-email, and in the visible text.
-              LinkedIn / GitHub: change the href.
-            -->
             <ul class="contact-methods reveal" style="--d:120ms">
               <li>
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=layanthi.joseph@gmail.com&su=Hello%20Layanthi" target="_blank" rel="noopener noreferrer"
@@ -1102,12 +1002,6 @@
             </ul>
           </div>
 
-          <!--
-            EDIT HERE: the form.
-            data-endpoint = my Formspree form address (messages are sent to my inbox).
-            If it is ever empty, the Send button opens Gmail with the message already written.
-            data-fallback-email = the address used by that fallback.
-          -->
           <form class="contact-form reveal" id="contactForm" style="--d:200ms" novalidate
             data-endpoint="https://formspree.io/f/mdekqeee"
             data-fallback-email="layanthi.joseph@gmail.com">
@@ -1130,7 +1024,6 @@
               <p class="field-error" id="cfMessageError" hidden></p>
             </div>
 
-            <!-- hidden spam trap: real visitors never see or fill this -->
             <div class="hp" aria-hidden="true">
               <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
             </div>
@@ -1144,7 +1037,7 @@
     </section>
   </main>
 
-  <!-- ============ FOOTER ============ -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -1165,7 +1058,6 @@
               </a>
             </li>
             <li>
-              <!-- copies my email address only (it does NOT open a mail app) -->
               <button type="button" class="copy-email" data-email="layanthi.joseph@gmail.com" aria-label="Copy my email address" title="Copy email address">
                 <svg aria-hidden="true"><use href="#i-mail"/></svg>
               </button>
@@ -1191,7 +1083,7 @@
     </div>
   </footer>
 
-  <!-- ============ EDUCATION CERTIFICATE MODAL (certificate left, details right) ============ -->
+  <!-- EDUCATION CERTIFICATE POP-UP -->
   <div class="modal" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle" aria-hidden="true">
     <div class="modal-backdrop"></div>
 
@@ -1202,7 +1094,6 @@
 
       <div class="cert-layout">
 
-        <!-- left: the certificate -->
         <div class="cert-preview">
           <div class="cert-stage">
             <button type="button" class="shot-arrow prev" id="certPrev" aria-label="Previous image" hidden>
@@ -1210,9 +1101,7 @@
             </button>
 
             <img id="certModalImg" src="" alt="" />
-            <p class="modal-missing" id="certModalMissing" hidden>
-              Certificate image not added yet. Save it in the assets/certificates folder using the file name written in the button's data-src in index.html.
-            </p>
+            <p class="modal-missing" id="certModalMissing" hidden>Certificate image not added yet.</p>
 
             <button type="button" class="shot-arrow next" id="certNext" aria-label="Next image" hidden>
               <svg class="nav-ico" aria-hidden="true"><use href="#i-chev-r"/></svg>
@@ -1221,7 +1110,6 @@
           <div class="cert-switch" id="certSwitch" hidden></div>
         </div>
 
-        <!-- right: the details (school name + duration on one row, then qualification) -->
         <div class="cert-details">
           <div class="cert-school-row">
             <p class="cert-school" id="certSchool"></p>
@@ -1258,7 +1146,7 @@
     </div>
   </div>
 
-  <!-- ============ CERTIFICATION MODAL (certificate left, details right) ============ -->
+  <!-- CERTIFICATION POP-UP -->
   <div class="modal" id="credModal" role="dialog" aria-modal="true" aria-labelledby="credTitle" aria-hidden="true">
     <div class="modal-backdrop"></div>
 
@@ -1271,9 +1159,7 @@
 
         <div class="cert-preview">
           <img id="credImg" src="" alt="" />
-          <p class="modal-missing" id="credMissing" hidden>
-            Certificate image not added yet. Save it in the assets/certificates folder using the file name written in that card's img src in index.html.
-          </p>
+          <p class="modal-missing" id="credMissing" hidden>Certificate image not added yet.</p>
         </div>
 
         <div class="cert-details">
@@ -1284,7 +1170,6 @@
             <span class="cert-tag cert-tag-warn" id="credPlaceholder" hidden>Placeholder, replace with a real certificate</span>
           </div>
 
-          <!-- digital badge (only for certificates that have one) -->
           <div class="cred-badge" id="credBadgeWrap" hidden>
             <img id="credBadge" src="" alt="" />
             <div class="cred-badge-text">
@@ -1306,7 +1191,7 @@
     </div>
   </div>
 
-  <!-- ============ PROJECT DETAIL MODAL ============ -->
+  <!-- PROJECT POP-UP -->
   <div class="modal" id="projModal" role="dialog" aria-modal="true" aria-labelledby="projTitle" aria-hidden="true">
     <div class="modal-backdrop"></div>
 
@@ -1316,7 +1201,6 @@
       </button>
 
       <div class="pd-scroll" id="pdScroll">
-        <!-- the project content is placed here by main.js -->
         <div class="pd-body" id="pdBody"></div>
 
         <nav class="pd-nav" aria-label="Project navigation">
@@ -1333,7 +1217,7 @@
     </div>
   </div>
 
-  <!-- ============ SCREENSHOT VIEWER ============ -->
+  <!-- SCREENSHOT VIEWER -->
   <div class="modal modal-top" id="shotModal" role="dialog" aria-modal="true" aria-label="Project screenshots" aria-hidden="true">
     <div class="modal-backdrop"></div>
 
@@ -1350,9 +1234,7 @@
         </button>
 
         <img id="shotImg" src="" alt="" />
-        <p class="modal-missing" id="shotMissing" hidden>
-          Screenshot not added yet. Save it in assets/images/projects/ using the file name written in index.html.
-        </p>
+        <p class="modal-missing" id="shotMissing" hidden>Screenshot not added yet.</p>
 
         <button type="button" class="shot-arrow next" id="shotNext" aria-label="Next screenshot">
           <svg class="nav-ico" aria-hidden="true"><use href="#i-chev-r"/></svg>
@@ -1364,12 +1246,10 @@
     </div>
   </div>
 
-  <!-- back to top (appears after scrolling down) -->
   <button type="button" class="to-top" id="toTop" aria-label="Back to top">
     <svg aria-hidden="true"><use href="#i-chev-up"/></svg>
   </button>
 
-  <!-- small pop-up message (used by the copy-email buttons) -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/main.js"></script>

@@ -1,4 +1,3 @@
-
 /* ============ 1. DESIGN TOKENS ============ */
 :root {
   --bg-primary: #050b14;
@@ -49,10 +48,9 @@ ul, ol { list-style: none; }
 button { font-family: inherit; cursor: pointer; }
 [hidden] { display: none !important; }
 
-/* stops the page scrolling behind an open pop-up */
 body.modal-open { overflow: hidden; }
 
-/* ============ 3. BACKGROUND (grid + glows) ============ */
+/* ============ 3. BACKGROUND ============ */
 body::before {
   content: "";
   position: fixed;
@@ -68,7 +66,7 @@ body::before {
   background-size: auto, auto, auto, 48px 48px, 48px 48px;
 }
 
-/* ============ 4. LAYOUT HELPERS ============ */
+/* ============ 4. LAYOUT ============ */
 .container {
   width: min(1140px, 100% - 2.5rem);
   margin-inline: auto;
@@ -250,7 +248,6 @@ body::before {
   box-shadow: 0 6px 22px rgba(34, 211, 238, 0.22);
 }
 
-/* small icon inside a button */
 .btn-ico {
   flex-shrink: 0;
   width: 18px;
@@ -332,7 +329,6 @@ body::before {
   margin-top: 2rem;
 }
 
-/* social icon rows (hero and footer share the same look) */
 .hero-social,
 .footer-social {
   display: flex;
@@ -374,14 +370,12 @@ body::before {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-/* the brand logos (LinkedIn, GitHub) are solid shapes, not line icons */
 .hero-social svg[fill="currentColor"],
 .footer-social svg.fill {
   fill: currentColor;
   stroke: none;
 }
 
-/* profile photo */
 .hero-photo { display: grid; place-items: center; }
 
 .photo-frame {
@@ -418,7 +412,6 @@ body::before {
 .photo-frame.no-photo img { display: none; }
 .photo-frame.no-photo .photo-fallback { display: grid; }
 
-/* decorative shapes (very slow, subtle) */
 .hero-decor { position: absolute; inset: 0; pointer-events: none; }
 
 .glow {
@@ -593,7 +586,7 @@ body::before {
   box-shadow: 0 6px 18px rgba(34, 211, 238, 0.2);
 }
 
-/* ============ 11. MODALS (shared) ============ */
+/* ============ 11. POP-UPS ============ */
 .modal {
   position: fixed;
   inset: 0;
@@ -607,7 +600,6 @@ body::before {
 }
 .modal.open { opacity: 1; visibility: visible; }
 
-/* a pop-up that opens on top of another pop-up (screenshot viewer) */
 .modal-top { z-index: 350; }
 
 .modal-backdrop {
@@ -633,7 +625,6 @@ body::before {
 }
 .modal.open .modal-box { transform: none; }
 
-/* wider box for the two-panel certificate view */
 .modal-wide { width: min(1080px, 100%); }
 
 .modal-close {
@@ -665,7 +656,6 @@ body::before {
   align-items: start;
 }
 
-/* left side: certificate stays in view while the details scroll */
 .cert-preview {
   position: sticky;
   top: 0;
@@ -689,11 +679,10 @@ body::before {
   border-radius: 10px;
 }
 
-/* right side: details */
 .cert-details { padding-right: 0.2rem; }
 
 .cert-school {
-  padding-right: 3rem; /* keeps text clear of the close button */
+  padding-right: 3rem;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -713,11 +702,6 @@ body::before {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.9rem;
-}
-/* the dates pill that sits above the school name */
-.cert-tags-top {
-  margin-top: 0;
-  margin-bottom: 0.7rem;
 }
 .cert-tag {
   padding: 0.15rem 0.75rem;
@@ -755,7 +739,6 @@ body::before {
 }
 .cert-block p + p { margin-top: 0.7rem; }
 
-/* Z-score / rank tiles */
 .cert-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -781,7 +764,6 @@ body::before {
   color: var(--text-muted);
 }
 
-/* subject + grade rows */
 .cert-subjects li {
   display: flex;
   align-items: center;
@@ -804,6 +786,44 @@ body::before {
   background: rgba(34, 211, 238, 0.1);
   border: 1px solid rgba(34, 211, 238, 0.3);
   border-radius: 8px;
+}
+
+.cert-school-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.8rem;
+  padding-right: 3rem;
+}
+.cert-school-row .cert-school { padding-right: 0; }
+
+.cert-stage { position: relative; display: grid; place-items: center; }
+.cert-stage .modal-missing { width: 100%; }
+.cert-preview img { transition: opacity 0.22s ease, transform 0.22s ease; }
+.cert-preview img.fade { opacity: 0; transform: translateX(var(--sx, 0px)); }
+
+.cert-switch {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+.cert-switch-btn {
+  padding: 0.35rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: rgba(16, 30, 50, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: color var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.cert-switch-btn:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
+.cert-switch-btn.active {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  background: rgba(34, 211, 238, 0.1);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.25);
 }
 
 /* ============ 12. SKILLS ============ */
@@ -841,7 +861,6 @@ body::before {
   box-shadow: 0 0 26px rgba(34, 211, 238, 0.18);
 }
 
-/* category icons: line style, blue (cyan when selected) */
 .cat-icon {
   flex-shrink: 0;
   width: 26px;
@@ -860,12 +879,11 @@ body::before {
 .cat-name { font-size: 0.97rem; font-weight: 600; }
 .cat-count { font-size: 0.78rem; font-weight: 400; color: var(--text-muted); }
 
-/* the area under the cards where skills swoop in */
 .skill-stage {
   margin-top: 1.6rem;
   padding: 1.6rem;
   min-height: 190px;
-  overflow: hidden; /* keeps the swoop from causing sideways scrolling */
+  overflow: hidden;
   background: rgba(11, 22, 38, 0.6);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -898,7 +916,6 @@ body::before {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  /* each skill swoops in slightly after the one before it */
   animation: swoopIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(var(--i, 0) * 45ms);
   transition: border-color var(--transition), box-shadow var(--transition);
@@ -918,7 +935,6 @@ body::before {
   width: 22px;
   height: 22px;
   color: var(--accent-cyan);
-  /* these let the small line icons from the icon library draw correctly */
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
@@ -926,7 +942,6 @@ body::before {
   stroke-linejoin: round;
 }
 
-/* shown only if a logo can't be loaded: a small letter badge */
 .skill-icon-fallback {
   display: grid;
   place-items: center;
@@ -972,7 +987,6 @@ body::before {
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4), 0 0 28px rgba(59, 130, 246, 0.25);
 }
 
-/* cards revealed by "View more": each one fades up slightly after the one before it */
 .cert-in {
   animation: certIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
   animation-delay: calc(var(--k, 0) * 70ms);
@@ -982,15 +996,13 @@ body::before {
   to   { opacity: 1; transform: none; }
 }
 
-/* the "View more certifications" button */
 .cert-more-wrap {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
 }
-.cert-more:empty { display: none; }   /* no empty button if JavaScript is off */
+.cert-more:empty { display: none; }
 
-/* image + title (clicking opens the details pop-up) */
 .cert-card-open {
   display: flex;
   flex-direction: column;
@@ -1011,7 +1023,6 @@ body::before {
   border-bottom: 1px solid var(--border);
 }
 
-/* the certificate image itself */
 .cert-img {
   width: 100%;
   height: 100%;
@@ -1020,7 +1031,6 @@ body::before {
 }
 .cert-card:hover .cert-img { transform: scale(1.04); }
 
-/* small digital badge on the corner of a card */
 .cert-badge {
   position: absolute;
   right: 0.7rem;
@@ -1034,7 +1044,6 @@ body::before {
 }
 .cert-card:hover .cert-badge { transform: scale(1.08); }
 
-/* shown only if the certificate image file is missing */
 .cert-thumb-fallback {
   display: none;
   position: absolute;
@@ -1063,7 +1072,6 @@ body::before {
   stroke-linejoin: round;
 }
 
-/* "Placeholder" badge: only shows on a card that has the word data-placeholder */
 .cert-card[data-placeholder] .cert-thumb::after {
   content: "Placeholder";
   position: absolute;
@@ -1105,10 +1113,8 @@ body::before {
   text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
 }
 
-/* details pop-up for certifications */
 .cred-title { padding-right: 3rem; }
 
-/* digital badge shown in the pop-up */
 .cred-badge {
   display: flex;
   align-items: center;
@@ -1200,7 +1206,6 @@ body::before {
 }
 
 /* ============ 14. SCROLL REVEAL ============ */
-/* only active when JavaScript is running (the "js" class is added by main.js) */
 .js .reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -1212,7 +1217,7 @@ body::before {
   transform: none;
 }
 
-/* ============ 15. PROJECTS GALLERY ============ */
+/* ============ 15. PROJECTS ============ */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1220,7 +1225,6 @@ body::before {
 }
 .project-item { display: flex; }
 
-/* when the last project is alone on its row, centre it */
 .project-item:last-child:nth-child(odd) {
   grid-column: 1 / -1;
   width: calc(50% - 0.9rem);
@@ -1245,7 +1249,6 @@ body::before {
   border-color: var(--accent-cyan);
   box-shadow: 0 16px 38px rgba(0, 0, 0, 0.4), 0 0 30px rgba(59, 130, 246, 0.28);
 }
-/* same lift when reached with the keyboard */
 .project-card:has(.project-open:focus-visible) {
   transform: translateY(-6px);
   border-color: var(--accent-cyan);
@@ -1253,7 +1256,6 @@ body::before {
 }
 .project-card:active { transform: translateY(-2px) scale(0.99); }
 
-/* the whole card is one big button */
 .project-open {
   display: flex;
   flex-direction: column;
@@ -1269,7 +1271,6 @@ body::before {
   border-radius: 18px;
 }
 
-/* the large image (about 60-70% of the card) */
 .project-media {
   position: relative;
   display: block;
@@ -1290,7 +1291,6 @@ body::before {
   filter: brightness(1.1);
 }
 
-/* shown only if the image file is missing */
 .project-fallback {
   display: none;
   position: absolute;
@@ -1310,7 +1310,6 @@ body::before {
 .project-media.no-image img { display: none; }
 .project-media.no-image .project-fallback { display: flex; }
 
-/* "View Project" overlay that fades in on hover */
 .project-view {
   position: absolute;
   inset: 0;
@@ -1337,7 +1336,6 @@ body::before {
 .project-card:hover .project-view b,
 .project-open:focus-visible .project-view b { transform: none; }
 
-/* touch screens have no hover, so the button is always visible (small, bottom right) */
 @media (hover: none) {
   .project-view {
     opacity: 1;
@@ -1352,7 +1350,6 @@ body::before {
   }
 }
 
-/* "Placeholder" badge: only shows on a card that has the word data-placeholder */
 .project-card[data-placeholder] .project-media::after {
   content: "Placeholder";
   position: absolute;
@@ -1388,7 +1385,7 @@ body::before {
   color: var(--text-muted);
 }
 
-/* ============ 16. PROJECT DETAIL POP-UP ============ */
+/* ============ 16. PROJECT POP-UP ============ */
 .proj-box {
   width: min(1020px, 100%);
   padding: 0;
@@ -1398,7 +1395,6 @@ body::before {
   transform: none;
   transition: none;
 }
-/* the pop-up grows out of the card that was clicked */
 .modal.open .proj-box {
   transform-origin: var(--ox, 50%) var(--oy, 50%);
   animation: projOpen 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -1408,7 +1404,6 @@ body::before {
   to   { opacity: 1; transform: none; }
 }
 
-/* only this part scrolls, the page behind stays still */
 .pd-scroll {
   flex: 1;
   min-height: 0;
@@ -1425,7 +1420,6 @@ body::before {
   transform: translateX(var(--out, 0px));
 }
 
-/* content appears one piece after another */
 .modal.open .pd-reveal {
   animation: pdIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(var(--i, 0) * 70ms + 120ms);
@@ -1499,7 +1493,6 @@ body::before {
 }
 .pd-section > p + p { margin-top: 0.8rem; }
 
-/* key features: small cards */
 .pd-features {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1536,7 +1529,6 @@ body::before {
   box-shadow: 0 0 18px rgba(59, 130, 246, 0.18);
 }
 
-/* MY CONTRIBUTION: the most prominent part of every project */
 .pd-contrib {
   padding: 1.5rem;
   background:
@@ -1601,7 +1593,6 @@ body::before {
   border-radius: 50%;
 }
 
-/* QA & Testing card stands out */
 .pc-qa {
   border-color: rgba(34, 211, 238, 0.6);
   background: linear-gradient(160deg, rgba(34, 211, 238, 0.12), rgba(16, 30, 50, 0.85) 60%);
@@ -1621,7 +1612,6 @@ body::before {
   color: var(--text-muted);
 }
 
-/* technology tags */
 .pd-tech {
   display: flex;
   flex-wrap: wrap;
@@ -1643,7 +1633,6 @@ body::before {
   box-shadow: 0 0 16px rgba(34, 211, 238, 0.25);
 }
 
-/* screenshot thumbnails */
 .pd-shots {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -1691,7 +1680,6 @@ body::before {
   margin-top: 2.2rem;
 }
 
-/* previous / next project */
 .pd-nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1850,7 +1838,7 @@ body::before {
   box-shadow: 0 0 14px rgba(34, 211, 238, 0.35);
 }
 
-/* ============ 18. TOAST (pop-up message) ============ */
+/* ============ 18. TOAST ============ */
 .toast {
   position: fixed;
   left: 50%;
@@ -1968,7 +1956,6 @@ body::before {
   transform: translate(2px, -2px);
 }
 
-/* the form */
 .contact-form {
   padding: 1.8rem;
   background: rgba(16, 30, 50, 0.55);
@@ -2015,7 +2002,6 @@ body::before {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 0 18px rgba(59, 130, 246, 0.25);
 }
 
-/* an invalid field: red border AND a written message (not colour alone) */
 .field.invalid input,
 .field.invalid textarea { border-color: #f87171; }
 .field-error {
@@ -2024,7 +2010,6 @@ body::before {
 }
 .field-error::before { content: "⚠ "; }
 
-/* spam trap: hidden from people */
 .hp {
   position: absolute;
   left: -9999px;
@@ -2035,7 +2020,6 @@ body::before {
 
 .contact-form .btn { margin-top: 0.4rem; }
 
-/* message shown after sending */
 .form-status {
   margin-top: 1rem;
   padding: 0.8rem 1rem;
@@ -2065,7 +2049,6 @@ body::before {
   background: rgba(5, 11, 20, 0.8);
   border-top: 1px solid var(--border);
 }
-/* soft glowing line along the top edge */
 .footer::before {
   content: "";
   position: absolute;
@@ -2128,236 +2111,7 @@ body::before {
   border-top: 1px solid rgba(30, 58, 95, 0.6);
 }
 
-/* ============ 21. TABLET & MOBILE ============ */
-@media (max-width: 960px) {
-  /* nav becomes a hamburger */
-  .nav-toggle { display: flex; }
-
-  .nav-menu {
-    position: absolute;
-    top: var(--nav-height);
-    left: 0;
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 0.5rem 1.25rem 1.25rem;
-    background: rgba(7, 17, 31, 0.97);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-12px);
-    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
-  }
-  .nav-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
-
-  .nav-link {
-    display: block;
-    padding: 0.9rem 0.25rem;
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(30, 58, 95, 0.4);
-  }
-  .nav-menu li:last-child .nav-link { border-bottom: none; }
-  .nav-link::after { display: none; }
-  .nav-link.active {
-    color: var(--accent-cyan);
-    padding-left: 0.9rem;
-    box-shadow: inset 3px 0 0 var(--accent-cyan);
-  }
-
-  /* hero stacks: photo first, then text */
-  .hero-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 2rem;
-  }
-  .hero-photo { order: -1; }
-  .photo-frame { width: min(240px, 60vw); }
-  .hero-intro { margin-inline: auto; }
-  .hero-buttons, .hero-social { justify-content: center; }
-  .hero-role { min-height: 3.4em; }
-
-  /* about stacks: text first, illustration below */
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  .about-visual { max-width: 380px; }
-
-  /* certificate pop-ups stack: certificate on top, details below */
-  .cert-layout {
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
-  }
-  .cert-preview { position: static; }
-  .cert-preview img { max-height: 55vh; }
-  .cert-school { padding-right: 3rem; }
-
-  /* skill cards: two per row */
-  .skill-cats { grid-template-columns: repeat(2, 1fr); }
-
-  /* certification cards: two per row */
-  .cert-grid { grid-template-columns: repeat(2, 1fr); }
-
-  /* project pop-up: a little less padding */
-  .pd-body { padding: 1.8rem 1.8rem 0.5rem; }
-  .pd-nav { margin-inline: 1.8rem; }
-
-  /* contact stacks: info on top, form below */
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-}
-
-@media (max-width: 560px) {
-  .nav-logo { font-size: 0.95rem; }
-  .hero-buttons { flex-direction: column; }
-  .hero-buttons .btn { width: 100%; padding: 1rem 1.6rem; }
-
-  .section { padding: 4.5rem 0; }
-  .timeline-card { padding: 1.2rem 1.2rem; }
-  .cert-btn { width: 100%; justify-content: center; padding: 0.8rem 1rem; }
-  .modal-box { padding: 1.1rem; }
-  .cert-details h3 { font-size: 1.25rem; }
-
-  /* skills: one card per row, easy to tap */
-  .skill-cats { grid-template-columns: 1fr; gap: 0.7rem; }
-  .skill-stage { padding: 1.2rem; }
-  .skill-item { padding: 0.6rem 0.85rem; }
-
-  /* certifications: one card per row, full-width "view more" button */
-  .cert-grid { grid-template-columns: 1fr; }
-  .cert-more { width: 100%; }
-  .cred-actions .btn { width: 100%; }
-
-  /* projects: one card per row */
-  .project-grid { grid-template-columns: 1fr; gap: 1.4rem; }
-  .project-item:last-child:nth-child(odd) { width: 100%; }
-  .project-name { font-size: 1.3rem; }
-
-  /* project pop-up: almost the whole screen */
-  #projModal { padding: 0; }
-  .proj-box {
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    max-height: none;
-    padding: 0;
-    border-radius: 0;
-    border: 0;
-  }
-  .pd-body { padding: 1.5rem 1.2rem 0.5rem; }
-  .pd-nav {
-    grid-template-columns: 1fr;
-    margin-inline: 1.2rem;
-    padding-bottom: 1.6rem;
-  }
-  .pd-nav-btn.next { justify-content: space-between; }
-  .pd-features { grid-template-columns: 1fr; }
-  .pd-contrib { padding: 1.1rem; }
-  .pd-actions .btn { width: 100%; }
-
-  /* screenshot viewer: smaller arrows */
-  .shot-arrow { width: 40px; height: 40px; }
-  .shot-box { padding: 1rem; }
-
-  /* contact: comfortable form, full-width button */
-  .contact-form { padding: 1.3rem; }
-  .contact-form .btn { width: 100%; padding: 1rem 1.6rem; }
-  .contact-card { padding: 0.9rem 1rem; }
-
-  /* footer: everything stacked and centred */
-  .footer { padding-top: 3rem; }
-  .footer-top {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 2rem;
-  }
-  .footer-social { justify-content: center; }
-  .footer-nav ul {
-    grid-template-columns: repeat(2, auto);
-    justify-content: center;
-    text-align: center;
-    gap: 0.6rem 2rem;
-  }
-
-  /* back-to-top sits a little closer to the corner */
-  .to-top { right: 14px; bottom: 14px; }
-}
-
-/* ============ 22. ACCESSIBILITY ============ */
-:focus-visible {
-  outline: 2px solid var(--accent-cyan);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-::selection { background: var(--accent); color: #fff; }
-
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  /* show revealed content straight away */
-  .js .reveal { opacity: 1; transform: none; }
-}
-
-/* pop-up: institution name and duration on one row */
-.cert-school-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem 0.8rem;
-  padding-right: 3rem; /* keeps clear of the close button */
-}
-.cert-school-row .cert-school { padding-right: 0; }
-
-/* certificate / transcript switching */
-.cert-stage { position: relative; display: grid; place-items: center; }
-.cert-stage .modal-missing { width: 100%; }
-.cert-preview img { transition: opacity 0.22s ease, transform 0.22s ease; }
-.cert-preview img.fade { opacity: 0; transform: translateX(var(--sx, 0px)); }
-
-.cert-switch {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.8rem;
-}
-.cert-switch-btn {
-  padding: 0.35rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: rgba(16, 30, 50, 0.7);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  transition: color var(--transition), border-color var(--transition), box-shadow var(--transition);
-}
-.cert-switch-btn:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
-.cert-switch-btn.active {
-  color: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-  background: rgba(34, 211, 238, 0.1);
-  box-shadow: 0 0 14px rgba(34, 211, 238, 0.25);
-}
-
-/* ============ 23. FINAL POLISH ============ */
-
-/* "Skip to content" link: only visible when a keyboard user tabs to it */
+/* ============ 21. PAGE LOAD, SKIP LINK, BACK TO TOP ============ */
 .skip-link {
   position: fixed;
   top: -64px;
@@ -2373,7 +2127,6 @@ body::before {
 }
 .skip-link:focus { top: 12px; }
 
-/* page-load animation: shown only when JavaScript is running */
 .loader { display: none; }
 .js .loader {
   position: fixed;
@@ -2385,7 +2138,6 @@ body::before {
   gap: 1.4rem;
   background: var(--bg-primary);
   transition: opacity 0.6s ease, visibility 0.6s ease;
-  /* safety net: if main.js ever fails, the loader still goes away by itself */
   animation: loaderFailsafe 0.5s ease 4.5s forwards;
 }
 .loader.done { opacity: 0; visibility: hidden; }
@@ -2433,10 +2185,9 @@ body::before {
   to { opacity: 0; visibility: hidden; }
 }
 
-/* the hero appears once, right after the loader fades */
 .js:not(.loaded) .hero-inner {
   opacity: 0;
-  animation: heroFailsafe 0s linear 5s forwards;   /* safety net */
+  animation: heroFailsafe 0s linear 5s forwards;
 }
 .js.loaded .hero-inner {
   animation: heroIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -2449,12 +2200,6 @@ body::before {
   to { opacity: 1; }
 }
 
-/* with reduced motion there is no loader at all */
-@media (prefers-reduced-motion: reduce) {
-  .js .loader { display: none; }
-}
-
-/* back-to-top button (matches the social icon buttons) */
 .to-top {
   position: fixed;
   right: 22px;
@@ -2495,4 +2240,175 @@ body::before {
   border-color: var(--accent-cyan);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 18px rgba(34, 211, 238, 0.3);
   transform: translateY(-3px);
+}
+
+/* ============ 22. TABLET & MOBILE ============ */
+@media (max-width: 960px) {
+  .nav-toggle { display: flex; }
+
+  .nav-menu {
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.5rem 1.25rem 1.25rem;
+    background: rgba(7, 17, 31, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  }
+  .nav-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  .nav-link {
+    display: block;
+    padding: 0.9rem 0.25rem;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(30, 58, 95, 0.4);
+  }
+  .nav-menu li:last-child .nav-link { border-bottom: none; }
+  .nav-link::after { display: none; }
+  .nav-link.active {
+    color: var(--accent-cyan);
+    padding-left: 0.9rem;
+    box-shadow: inset 3px 0 0 var(--accent-cyan);
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+  .hero-photo { order: -1; }
+  .photo-frame { width: min(240px, 60vw); }
+  .hero-intro { margin-inline: auto; }
+  .hero-buttons, .hero-social { justify-content: center; }
+  .hero-role { min-height: 3.4em; }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .about-visual { max-width: 380px; }
+
+  .cert-layout {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .cert-preview { position: static; }
+  .cert-preview img { max-height: 55vh; }
+  .cert-school { padding-right: 3rem; }
+
+  .skill-cats { grid-template-columns: repeat(2, 1fr); }
+
+  .cert-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .pd-body { padding: 1.8rem 1.8rem 0.5rem; }
+  .pd-nav { margin-inline: 1.8rem; }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav-logo { font-size: 0.95rem; }
+  .hero-buttons { flex-direction: column; }
+  .hero-buttons .btn { width: 100%; padding: 1rem 1.6rem; }
+
+  .section { padding: 4.5rem 0; }
+  .timeline-card { padding: 1.2rem 1.2rem; }
+  .cert-btn { width: 100%; justify-content: center; padding: 0.8rem 1rem; }
+  .modal-box { padding: 1.1rem; }
+  .cert-details h3 { font-size: 1.25rem; }
+
+  .skill-cats { grid-template-columns: 1fr; gap: 0.7rem; }
+  .skill-stage { padding: 1.2rem; }
+  .skill-item { padding: 0.6rem 0.85rem; }
+
+  .cert-grid { grid-template-columns: 1fr; }
+  .cert-more { width: 100%; }
+  .cred-actions .btn { width: 100%; }
+
+  .project-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+  .project-item:last-child:nth-child(odd) { width: 100%; }
+  .project-name { font-size: 1.3rem; }
+
+  #projModal { padding: 0; }
+  .proj-box {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    padding: 0;
+    border-radius: 0;
+    border: 0;
+  }
+  .pd-body { padding: 1.5rem 1.2rem 0.5rem; }
+  .pd-nav {
+    grid-template-columns: 1fr;
+    margin-inline: 1.2rem;
+    padding-bottom: 1.6rem;
+  }
+  .pd-nav-btn.next { justify-content: space-between; }
+  .pd-features { grid-template-columns: 1fr; }
+  .pd-contrib { padding: 1.1rem; }
+  .pd-actions .btn { width: 100%; }
+
+  .shot-arrow { width: 40px; height: 40px; }
+  .shot-box { padding: 1rem; }
+
+  .contact-form { padding: 1.3rem; }
+  .contact-form .btn { width: 100%; padding: 1rem 1.6rem; }
+  .contact-card { padding: 0.9rem 1rem; }
+
+  .footer { padding-top: 3rem; }
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+  .footer-social { justify-content: center; }
+  .footer-nav ul {
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    text-align: center;
+    gap: 0.6rem 2rem;
+  }
+
+  .to-top { right: 14px; bottom: 14px; }
+}
+
+/* ============ 23. ACCESSIBILITY ============ */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection { background: var(--accent); color: #fff; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+  .js .loader { display: none; }
 }

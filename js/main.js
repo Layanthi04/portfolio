@@ -1,12 +1,9 @@
-
-/* tells the stylesheet that JavaScript is running (used by the scroll-reveal) */
 document.documentElement.classList.add("js");
 
 
-/* ============ SHARED HELPERS ============ */
+/* ============ HELPERS ============ */
 const SVG_NS = "http://www.w3.org/2000/svg";
 
-/* builds an element with optional class name and text */
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -14,7 +11,6 @@ function el(tag, className, text) {
   return node;
 }
 
-/* builds a small icon that points at a symbol in the icon library at the top of index.html */
 function icon(id, extraClass) {
   const svg = document.createElementNS(SVG_NS, "svg");
   svg.setAttribute("class", "btn-ico" + (extraClass ? " " + extraClass : ""));
@@ -26,17 +22,44 @@ function icon(id, extraClass) {
 }
 
 
+/* ============ PAGE LOAD ============ */
+const loader = document.getElementById("loader");
+const LOADER_MIN_MS = 900;
+const LOADER_MAX_MS = 3500;
+const loaderStart = performance.now();
+let loaderDone = false;
+
+function finishLoader() {
+  if (loaderDone) return;
+  loaderDone = true;
+  document.documentElement.classList.add("loaded");
+  if (loader) {
+    loader.classList.add("done");
+    setTimeout(() => loader.remove(), 700);
+  }
+}
+
+if (!loader || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  finishLoader();
+} else {
+  const ready = () => setTimeout(finishLoader, Math.max(0, LOADER_MIN_MS - (performance.now() - loaderStart)));
+  if (document.readyState === "complete") ready();
+  else window.addEventListener("load", ready);
+  setTimeout(finishLoader, LOADER_MAX_MS);
+}
+
+
 /* ============ NAVBAR ============ */
 const navbar = document.getElementById("navbar");
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-link");
 const sections = document.querySelectorAll("main section[id]");
+const toTop = document.getElementById("toTop");
 
-/* 1. Add a stronger background once the page is scrolled,
-      and highlight "Contact Me" when the very bottom of the page is reached */
 function handleNavbarScroll() {
   navbar.classList.toggle("scrolled", window.scrollY > 20);
+  toTop.classList.toggle("show", window.scrollY > 600);
 
   const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
   if (atBottom) {
@@ -48,7 +71,11 @@ function handleNavbarScroll() {
 window.addEventListener("scroll", handleNavbarScroll, { passive: true });
 handleNavbarScroll();
 
-/* 2. Open / close the mobile menu */
+toTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0 });
+  document.querySelector(".nav-logo").focus({ preventScroll: true });
+});
+
 function setMenu(open) {
   navMenu.classList.toggle("open", open);
   navToggle.classList.toggle("open", open);
@@ -60,12 +87,10 @@ navToggle.addEventListener("click", () => {
   setMenu(!navMenu.classList.contains("open"));
 });
 
-/* 3. Close the menu when a link is clicked */
 navLinks.forEach((link) => {
   link.addEventListener("click", () => setMenu(false));
 });
 
-/* 4. Close the menu with Escape, or when the screen becomes wide again */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") setMenu(false);
 });
@@ -73,7 +98,6 @@ window.addEventListener("resize", () => {
   if (window.innerWidth > 960) setMenu(false);
 });
 
-/* 5. Highlight the link of the section currently on screen */
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -97,10 +121,10 @@ const titles = [
   "Aspiring UI/UX Designer",
 ];
 
-const TYPE_SPEED = 70;     // ms per letter typed
-const DELETE_SPEED = 40;   // ms per letter deleted
-const PAUSE_AFTER = 1600;  // pause once a title is fully typed
-const PAUSE_BEFORE = 400;  // pause before typing the next title
+const TYPE_SPEED = 70;
+const DELETE_SPEED = 40;
+const PAUSE_AFTER = 1600;
+const PAUSE_BEFORE = 400;
 
 let titleIndex = 0;
 let charIndex = 0;
@@ -129,7 +153,6 @@ function typeLoop() {
   setTimeout(typeLoop, DELETE_SPEED);
 }
 
-/* people who prefer reduced motion just see the first title, no animation */
 if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   typedEl.textContent = titles[0];
 } else {
@@ -137,7 +160,7 @@ if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 }
 
 
-/* ============ HERO: PROFILE PHOTO FALLBACK ============ */
+/* ============ HERO: PROFILE PHOTO ============ */
 const profileImg = document.getElementById("profileImg");
 const photoFrame = profileImg.closest(".photo-frame");
 
@@ -148,7 +171,7 @@ profileImg.addEventListener("error", showFallback);
 if (profileImg.complete && profileImg.naturalWidth === 0) showFallback();
 
 
-/* ============ TOAST (pop-up message) ============ */
+/* ============ TOAST ============ */
 const toast = document.getElementById("toast");
 let toastTimer;
 
@@ -160,18 +183,12 @@ function showToast(message) {
 }
 
 
-/* ============ COPY EMAIL ============
-   Any element with class "copy-email" and a data-email attribute copies the address
-   and shows a message. The message can be changed with data-toast="..." on the element.
-   - The hero and footer email icons are plain buttons: they only copy.
-   - The Contact section card is also a link that opens Gmail in a new tab:
-     the click is not stopped, so it copies AND opens Gmail. */
+/* ============ COPY EMAIL ============ */
 async function copyText(text) {
   try {
     await navigator.clipboard.writeText(text);
     return true;
   } catch (err) {
-    // fallback for older browsers
     try {
       const temp = document.createElement("textarea");
       temp.value = text;
@@ -197,13 +214,11 @@ document.querySelectorAll(".copy-email").forEach((link) => {
 });
 
 
-/* ============ MODALS: SHARED OPEN / CLOSE ============
-   Used by every pop-up. Pop-ups can stack (the screenshot viewer opens
-   on top of the project pop-up), so open ones are kept in a list. */
+/* ============ POP-UPS: OPEN / CLOSE ============ */
 const modalStack = [];
 
 function openModal(modal) {
-  modal._opener = document.activeElement;   // so focus can go back there on close
+  modal._opener = document.activeElement;
   modalStack.push(modal);
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
@@ -222,7 +237,6 @@ function closeModal(modal) {
   if (modal._opener) modal._opener.focus();
 }
 
-/* close with the X button or by clicking the dark background */
 document.querySelectorAll(".modal").forEach((modal) => {
   modal.querySelector(".modal-close").addEventListener("click", () => closeModal(modal));
   modal.querySelector(".modal-backdrop").addEventListener("click", () => closeModal(modal));
@@ -232,25 +246,21 @@ document.addEventListener("keydown", (e) => {
   const top = modalStack[modalStack.length - 1];
   if (!top) return;
 
-  /* Escape closes only the pop-up on top */
   if (e.key === "Escape") {
     closeModal(top);
     return;
   }
 
-  /* arrow keys move through screenshots */
   if (top === shotModal) {
     if (e.key === "ArrowLeft") { stepShot(-1); return; }
     if (e.key === "ArrowRight") { stepShot(1); return; }
   }
 
-  /* arrow keys switch between certificate and transcript */
   if (top === certModal) {
     if (e.key === "ArrowLeft") { stepCertImage(-1); return; }
     if (e.key === "ArrowRight") { stepCertImage(1); return; }
   }
 
-  /* keep keyboard focus inside the pop-up while it is open */
   if (e.key === "Tab") {
     const focusable = [...top.querySelectorAll("button, a[href]")].filter(
       (node) => node.getClientRects().length > 0 && !node.disabled && node.tabIndex !== -1
@@ -271,10 +281,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 
-/* ============ EDUCATION CERTIFICATE MODAL: DETAILS TEXT ============
-   Edit the written details shown in the pop-up here.
-   (The certificate IMAGE file names are edited in index.html,
-   on each "View Certificate" button: data-src and data-alt.) */
+/* ============ EDUCATION: POP-UP DETAILS ============ */
 const certData = {
   al: {
     school: "Pushpadana Girls’ College, Kandy, Sri Lanka",
@@ -353,7 +360,7 @@ const certData = {
 };
 
 
-/* ============ EDUCATION CERTIFICATE MODAL: LOGIC ============ */
+/* ============ EDUCATION: POP-UP LOGIC ============ */
 const certModal = document.getElementById("certModal");
 const certModalImg = document.getElementById("certModalImg");
 const certModalMissing = document.getElementById("certModalMissing");
@@ -374,11 +381,10 @@ const certPrev = document.getElementById("certPrev");
 const certNext = document.getElementById("certNext");
 const certSwitch = document.getElementById("certSwitch");
 
-let certImages = [];      // the image(s) of the education pop-up that is open
+let certImages = [];
 let certImgIndex = 0;
 let certBusy = false;
 
-/* tabs under the image (only when there is more than one image) */
 function buildCertSwitch() {
   const many = certImages.length > 1;
   certSwitch.hidden = !many;
@@ -396,14 +402,13 @@ function buildCertSwitch() {
   );
 }
 
-/* shows one image straight away */
 function setCertImage(i) {
   certImgIndex = i;
   const image = certImages[i];
   certModalMissing.hidden = true;
   certModalImg.hidden = false;
   certModalImg.alt = image.alt || "";
-  certModalImg.src = "";   // reset first so a missing image is re-checked every time
+  certModalImg.src = "";
   certModalImg.src = image.src;
   certSwitch.querySelectorAll(".cert-switch-btn").forEach((btn, k) => {
     btn.classList.toggle("active", k === i);
@@ -411,7 +416,6 @@ function setCertImage(i) {
   });
 }
 
-/* old image swoops out to one side, the new one swoops in from the other */
 function changeCertImage(target, dir) {
   if (certBusy || target === certImgIndex) return;
   certBusy = true;
@@ -421,7 +425,7 @@ function changeCertImage(target, dir) {
     certModalImg.style.transition = "none";
     certModalImg.style.setProperty("--sx", dir > 0 ? "80px" : "-80px");
     setCertImage(target);
-    void certModalImg.offsetWidth;   // apply the new start position
+    void certModalImg.offsetWidth;
     certModalImg.style.transition = "";
     certModalImg.classList.remove("fade");
     certBusy = false;
@@ -437,27 +441,22 @@ certPrev.addEventListener("click", () => stepCertImage(-1));
 certNext.addEventListener("click", () => stepCertImage(1));
 
 function fillCertModal(data, images) {
-  /* images (paths, alt texts and labels come from the button in index.html) */
   certImages = images;
   certBusy = false;
   certModalImg.classList.remove("fade");
   buildCertSwitch();
   setCertImage(0);
 
-  /* text details */
   certPeriod.textContent = data.period;
   certSchool.textContent = data.school;
   certTitle.textContent = data.title;
   certStatus.textContent = data.status;
 
-  /* activities (optional) */
   certActivitiesWrap.hidden = !data.activities;
   certActivities.textContent = data.activities || "";
 
-  /* description paragraphs */
   certDesc.replaceChildren(...data.description.map((text) => el("p", "", text)));
 
-  /* result tiles (optional) */
   certStatsWrap.hidden = data.stats.length === 0;
   certStats.replaceChildren(
     ...data.stats.map((s) => {
@@ -467,7 +466,6 @@ function fillCertModal(data, images) {
     })
   );
 
-  /* subjects and grades (optional) */
   certSubjectsWrap.hidden = data.subjects.length === 0;
   certSubjectsTitle.textContent = data.subjectsTitle || "Subjects";
   certSubjects.replaceChildren(
@@ -486,14 +484,12 @@ function openCertModal(key, images) {
   openModal(certModal);
 }
 
-/* if the certificate file isn't there yet, show a friendly message instead */
 certModalImg.addEventListener("error", () => {
   if (!certModal.classList.contains("open")) return;
   certModalImg.hidden = true;
   certModalMissing.hidden = false;
 });
 
-/* every "View ... Certificate" button in the Education section */
 document.querySelectorAll(".cert-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     const images = [{ src: btn.dataset.src, alt: btn.dataset.alt, label: btn.dataset.label || "Certificate" }];
@@ -505,28 +501,24 @@ document.querySelectorAll(".cert-btn").forEach((btn) => {
 });
 
 
-/* ============ SKILLS: CATEGORY SWITCHING ============
-   The skills themselves are written in index.html.
-   This code only handles clicking and the swoop animation. */
+/* ============ SKILLS ============ */
 const skillCats = document.querySelectorAll(".skill-cat");
 const skillPanels = document.querySelectorAll(".skill-list");
 const skillTitle = document.getElementById("skillStageTitle");
 
-const SWOOP_OUT_MS = 200;   // how long the old skills take to slide away
-let shownPanel = null;      // the skill list currently on screen
-let targetCategory = null;  // the category the visitor last clicked
+const SWOOP_OUT_MS = 200;
+let shownPanel = null;
+let targetCategory = null;
 let swapTimer;
 
 function getPanel(key) {
   return document.querySelector(`.skill-list[data-panel="${key}"]`);
 }
 
-/* stagger: each skill gets a number so it can swoop in just after the previous one */
 skillPanels.forEach((panel) => {
   panel.querySelectorAll(".skill-item").forEach((item, i) => item.style.setProperty("--i", i));
 });
 
-/* show how many skills each category has */
 skillCats.forEach((cat) => {
   const panel = getPanel(cat.dataset.category);
   if (!panel) return;
@@ -534,7 +526,6 @@ skillCats.forEach((cat) => {
   cat.querySelector(".cat-count").textContent = `${n} ${n === 1 ? "skill" : "skills"}`;
 });
 
-/* if a logo can't be loaded, show a small letter badge instead of a broken image */
 document.querySelectorAll(".skill-item img.skill-icon").forEach((img) => {
   img.addEventListener("error", () => {
     const letter = img.closest(".skill-item").textContent.trim().charAt(0);
@@ -554,14 +545,12 @@ function enterPanel(key) {
   const panel = getPanel(key);
   const card = document.querySelector(`.skill-cat[data-category="${key}"] .cat-name`);
 
-  /* new title swoops in */
   skillTitle.textContent = card.textContent;
   skillTitle.classList.remove("leaving");
   skillTitle.style.animation = "none";
-  void skillTitle.offsetWidth;          // restart the animation
+  void skillTitle.offsetWidth;
   skillTitle.style.animation = "";
 
-  /* showing the list restarts its skill animations */
   panel.hidden = false;
   shownPanel = panel;
 }
@@ -572,17 +561,14 @@ function selectCategory(key) {
   setActiveCard(key);
   clearTimeout(swapTimer);
 
-  /* first time: nothing to slide away */
   if (!shownPanel) {
     enterPanel(key);
     return;
   }
 
-  /* old skills and title swoop away... */
   shownPanel.classList.add("leaving");
   skillTitle.classList.add("leaving");
 
-  /* ...then the new ones swoop in */
   swapTimer = setTimeout(() => {
     skillPanels.forEach((p) => {
       p.hidden = true;
@@ -596,13 +582,10 @@ skillCats.forEach((cat) => {
   cat.addEventListener("click", () => selectCategory(cat.dataset.category));
 });
 
-/* the category that is open when the page loads */
 selectCategory("qa");
 
 
-/* ============ CERTIFICATIONS: CARDS + DETAILS POP-UP ============
-   All certification details are written in index.html, on each card.
-   This code only reads them and shows the pop-up. */
+/* ============ CERTIFICATIONS ============ */
 const credModal = document.getElementById("credModal");
 const credImg = document.getElementById("credImg");
 const credMissing = document.getElementById("credMissing");
@@ -616,13 +599,11 @@ const credVerify = document.getElementById("credVerify");
 const credNoLink = document.getElementById("credNoLink");
 const credNote = document.getElementById("credNote");
 
-/* does this card have a real verification link? */
 function cardLink(card) {
   const href = card.querySelector(".cert-verify").getAttribute("href");
   return href && href !== "#" ? href : "";
 }
 
-/* adds one "label + value" row to the details list */
 function addCredRow(label, valueNode) {
   const row = el("div", "cred-row");
   row.append(el("dt", "", label), valueNode);
@@ -635,18 +616,15 @@ function fillCredModal(card) {
   const badge = card.querySelector(".cert-badge");
   const link = cardLink(card);
 
-  /* title and placeholder notice */
   credTitle.textContent = card.querySelector(".cert-title").textContent.trim();
   credPlaceholder.hidden = !card.hasAttribute("data-placeholder");
 
-  /* larger certificate image */
   credMissing.hidden = true;
   credImg.hidden = false;
   credImg.alt = img.alt;
-  credImg.src = "";   // reset first so a missing image is re-checked every time
+  credImg.src = "";
   credImg.src = img.getAttribute("src");
 
-  /* digital badge (only if this card has one) */
   credBadgeWrap.hidden = !badge;
   if (badge) {
     credBadge.src = badge.getAttribute("src");
@@ -655,7 +633,6 @@ function fillCredModal(card) {
     if (d.badgeLink) credBadgeLink.href = d.badgeLink;
   }
 
-  /* information rows (empty ones are left out) */
   credInfo.replaceChildren();
   if (d.issuer) addCredRow("Platform / issuing organization", el("dd", "", d.issuer));
   if (d.issued) addCredRow("Issue date", el("dd", "", d.issued));
@@ -674,7 +651,6 @@ function fillCredModal(card) {
 
   if (link) addCredRow("Verification URL", el("dd", "cred-url", link));
 
-  /* verify button (with its hint), or a note if there is no online link */
   credVerify.hidden = !link;
   if (link) credVerify.href = link;
   credNoLink.hidden = Boolean(link);
@@ -682,7 +658,6 @@ function fillCredModal(card) {
   credNote.textContent = (link && d.verifyNote) || "";
 }
 
-/* if the certificate file isn't there yet, show a friendly message instead */
 credImg.addEventListener("error", () => {
   if (!credModal.classList.contains("open")) return;
   credImg.hidden = true;
@@ -701,14 +676,11 @@ document.querySelectorAll(".cert-card").forEach((card) => {
   const img = thumb.querySelector(".cert-img");
   const badge = thumb.querySelector(".cert-badge");
 
-  /* certificate image missing: show the "image coming soon" panel */
   img.addEventListener("error", () => thumb.classList.add("no-image"));
   if (img.complete && img.naturalWidth === 0 && img.loading !== "lazy") thumb.classList.add("no-image");
 
-  /* badge image missing: leave the badge out */
   if (badge) badge.addEventListener("error", () => badge.remove());
 
-  /* no online verification link: the card link opens the details pop-up instead */
   if (!cardLink(card)) {
     verify.textContent = "View Details →";
     verify.removeAttribute("target");
@@ -719,14 +691,11 @@ document.querySelectorAll(".cert-card").forEach((card) => {
     });
   }
 
-  /* clicking the image or title opens the details pop-up */
   openBtn.addEventListener("click", () => openCredModal(card));
 });
 
 
-/* ============ CERTIFICATIONS: "VIEW MORE" ============
-   The first few cards are shown. The number is data-initial on the grid in index.html.
-   The rest stay hidden until the visitor clicks the button. */
+/* ============ CERTIFICATIONS: VIEW MORE ============ */
 const certGrid = document.getElementById("certGrid");
 const certMore = document.getElementById("certMore");
 const certInitial = parseInt(certGrid.dataset.initial, 10) || 6;
@@ -740,8 +709,8 @@ function setCertExpanded(expanded) {
     card.hidden = !expanded;
     card.classList.remove("cert-in");
     if (expanded) {
-      card.style.setProperty("--k", i);   // each new card appears slightly after the one before
-      void card.offsetWidth;              // restart the animation
+      card.style.setProperty("--k", i);
+      void card.offsetWidth;
       card.classList.add("cert-in");
     }
   });
@@ -754,13 +723,12 @@ function setCertExpanded(expanded) {
 }
 
 if (certExtras.length === 0) {
-  certMore.parentElement.hidden = true;   // nothing extra to show: no button
+  certMore.parentElement.hidden = true;
 } else {
   setCertExpanded(false);
   certMore.addEventListener("click", () => {
     const wasExpanded = certExpanded;
     setCertExpanded(!wasExpanded);
-    /* after "Show fewer", scroll back to the top of the section so the visitor isn't lost */
     if (wasExpanded) {
       document.getElementById("certifications").scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -768,9 +736,7 @@ if (certExtras.length === 0) {
 }
 
 
-/* ============ PROJECTS: GALLERY + DETAIL POP-UP ============
-   Everything shown about a project is written in index.html, inside that
-   project's card. This code only reads it and builds the pop-up. */
+/* ============ PROJECTS ============ */
 const projModal = document.getElementById("projModal");
 const projBox = projModal.querySelector(".proj-box");
 const pdScroll = document.getElementById("pdScroll");
@@ -783,14 +749,13 @@ const pdNextName = document.getElementById("pdNextName");
 
 const projCards = [...document.querySelectorAll(".project-card")];
 let currentProject = -1;
-let currentShots = [];     // screenshots of the project that is open
+let currentShots = [];
 let swapping = false;
 
 function projText(card, selector) {
   return card.querySelector(selector).textContent.trim();
 }
 
-/* one named part of a project's hidden detail block, e.g. "overview" */
 function projPart(card, name) {
   return card.querySelector(`.project-detail [data-part="${name}"]`);
 }
@@ -799,13 +764,11 @@ function cloneAll(list) {
   return [...list].map((node) => node.cloneNode(true));
 }
 
-/* builds everything inside the pop-up for one project */
 function buildProject(index) {
   const card = projCards[index];
   const frag = document.createDocumentFragment();
   let order = 0;
 
-  /* each piece fades in slightly after the one before it */
   const reveal = (node) => {
     node.classList.add("pd-reveal");
     node.style.setProperty("--i", order++);
@@ -817,7 +780,6 @@ function buildProject(index) {
     return s;
   };
 
-  /* 1. title */
   const head = reveal(el("header", "pd-head"));
   const title = el("h3", "pd-title", projText(card, ".project-name"));
   title.id = "projTitle";
@@ -827,7 +789,6 @@ function buildProject(index) {
   }
   frag.append(head);
 
-  /* 2. large preview image */
   const cover = card.querySelector(".project-media img");
   const hero = reveal(el("figure", "pd-hero"));
   const heroImg = el("img");
@@ -838,7 +799,6 @@ function buildProject(index) {
   hero.append(heroImg, el("div", "pd-hero-fallback", "Project preview coming soon"));
   frag.append(hero);
 
-  /* 3. overview */
   const overview = projPart(card, "overview");
   if (overview && overview.children.length) {
     const s = section("About the project");
@@ -846,7 +806,6 @@ function buildProject(index) {
     frag.append(s);
   }
 
-  /* 4. key features */
   const features = projPart(card, "features");
   if (features && features.children.length) {
     const s = section("Key features");
@@ -856,17 +815,15 @@ function buildProject(index) {
     frag.append(s);
   }
 
-  /* 5. my contribution (the highlighted part) */
   const contribution = projPart(card, "contribution");
   if (contribution && contribution.children.length) {
-    const s = section("My contribution", "pd-contrib");
+    const s = section(contribution.dataset.title || "My contribution", "pd-contrib");
     const grid = el("div", "pc-grid");
     grid.append(...cloneAll(contribution.children));
     s.append(grid);
     frag.append(s);
   }
 
-  /* 6. technologies */
   const tech = projPart(card, "tech");
   if (tech && tech.children.length) {
     const s = section("Technologies");
@@ -876,7 +833,6 @@ function buildProject(index) {
     frag.append(s);
   }
 
-  /* 7. screenshots */
   currentShots = [];
   const shotList = projPart(card, "screenshots");
   if (shotList) {
@@ -909,7 +865,6 @@ function buildProject(index) {
     frag.append(s);
   }
 
-  /* 8. buttons: links (GitHub, demo) and View Screenshots */
   const actions = reveal(el("div", "pd-actions"));
   let hasAction = false;
 
@@ -917,7 +872,7 @@ function buildProject(index) {
   if (links) {
     links.querySelectorAll("a").forEach((a) => {
       const href = a.getAttribute("href");
-      if (!href || href === "#") return;   // no real link yet: skip it
+      if (!href || href === "#") return;
 
       const isGithub = a.dataset.icon === "github";
       const btn = el("a", "btn " + (hasAction ? "btn-outline" : "btn-primary"));
@@ -946,7 +901,6 @@ function buildProject(index) {
   return frag;
 }
 
-/* puts a project into the pop-up and updates the Previous / Next buttons */
 function renderProject(index) {
   currentProject = index;
   pdBody.replaceChildren(buildProject(index));
@@ -959,7 +913,6 @@ function renderProject(index) {
 }
 
 function openProject(index, originCard) {
-  /* the pop-up grows out of the card that was clicked */
   const r = originCard.getBoundingClientRect();
   projBox.style.setProperty("--ox", `${(((r.left + r.width / 2) / window.innerWidth) * 100).toFixed(1)}%`);
   projBox.style.setProperty("--oy", `${(((r.top + r.height / 2) / window.innerHeight) * 100).toFixed(1)}%`);
@@ -969,7 +922,6 @@ function openProject(index, originCard) {
   openModal(projModal);
 }
 
-/* Previous / Next: current project slides out, the next one slides in */
 function swapProject(step) {
   if (swapping) return;
   swapping = true;
@@ -991,7 +943,6 @@ function swapProject(step) {
 pdPrev.addEventListener("click", () => swapProject(-1));
 pdNext.addEventListener("click", () => swapProject(1));
 
-/* every project card: open on click, and handle a missing cover image */
 projCards.forEach((card, i) => {
   const media = card.querySelector(".project-media");
   const img = media.querySelector("img");
@@ -1039,7 +990,6 @@ function buildThumbs() {
   );
 }
 
-/* shows one screenshot straight away */
 function setShot(i) {
   shotIndex = (i + currentShots.length) % currentShots.length;
   const shot = currentShots[shotIndex];
@@ -1057,7 +1007,6 @@ function setShot(i) {
   });
 }
 
-/* fades the old screenshot out, then the new one in */
 function changeShot(target, dir) {
   if (shotBusy || target === shotIndex) return;
   shotBusy = true;
@@ -1088,7 +1037,6 @@ function openShots(i) {
   openModal(shotModal);
 }
 
-/* if the screenshot file isn't there yet, show a friendly message instead */
 shotImg.addEventListener("error", () => {
   if (!shotModal.classList.contains("open")) return;
   shotImg.hidden = true;
@@ -1098,7 +1046,6 @@ shotImg.addEventListener("error", () => {
 shotPrev.addEventListener("click", () => stepShot(-1));
 shotNext.addEventListener("click", () => stepShot(1));
 
-/* swipe left / right on touch screens */
 let touchStartX = null;
 shotStage.addEventListener("touchstart", (e) => {
   touchStartX = e.changedTouches[0].clientX;
@@ -1111,10 +1058,7 @@ shotStage.addEventListener("touchend", (e) => {
 }, { passive: true });
 
 
-/* ============ CONTACT FORM ============
-   The address the message is sent to is set in index.html: data-endpoint on the <form>.
-   - data-endpoint filled in (the Formspree address): the message is sent from the page.
-   - data-endpoint empty: Gmail opens in a new tab with the message already written. */
+/* ============ CONTACT FORM ============ */
 const contactForm = document.getElementById("contactForm");
 const cfSubmit = document.getElementById("cfSubmit");
 const formStatus = document.getElementById("formStatus");
@@ -1136,7 +1080,6 @@ const formFields = [
   {
     input: document.getElementById("cfMessage"),
     error: document.getElementById("cfMessageError"),
-    /* no minimum length: the message only has to be filled in */
     check: (value) => (value.trim().length < 1 ? "Please write a message." : ""),
   },
 ];
@@ -1147,7 +1090,6 @@ function setFormStatus(type, message) {
   formStatus.hidden = !message;
 }
 
-/* checks one field and shows or clears its message; returns true when it is fine */
 function validateField(field) {
   const message = field.check(field.input.value, field.input);
   field.error.textContent = message;
@@ -1159,7 +1101,6 @@ function validateField(field) {
 
 formFields.forEach((field) => {
   field.input.addEventListener("blur", () => validateField(field));
-  /* once a field has an error, clear it as soon as it is fixed */
   field.input.addEventListener("input", () => {
     if (field.input.closest(".field").classList.contains("invalid")) validateField(field);
   });
@@ -1169,10 +1110,8 @@ contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   setFormStatus("", "");
 
-  /* the hidden spam-trap field is filled: it is a bot, so do nothing */
   if (contactForm.elements._gotcha.value) return;
 
-  /* check every field; focus the first one that needs fixing */
   const results = formFields.map((field) => validateField(field));
   if (results.includes(false)) {
     formFields[results.indexOf(false)].input.focus();
@@ -1185,7 +1124,6 @@ contactForm.addEventListener("submit", async (e) => {
   const endpoint = (contactForm.dataset.endpoint || "").trim();
   const fallbackEmail = contactForm.dataset.fallbackEmail;
 
-  /* no form service set up: open Gmail in a new tab with the message ready to send */
   if (!endpoint) {
     const subject = encodeURIComponent(`Portfolio message from ${name}`);
     const body = encodeURIComponent(`${message}\n\nFrom: ${name} (${email})`);
@@ -1198,7 +1136,6 @@ contactForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  /* send the message through the form service */
   cfSubmit.disabled = true;
   cfSubmit.textContent = "Sending…";
 
@@ -1229,9 +1166,7 @@ contactForm.addEventListener("submit", async (e) => {
 });
 
 
-/* ============ SCROLL REVEAL ============
-   Anything with class "reveal" fades in and moves up when it scrolls into view.
-   The delay (style="--d:...") makes the heading, subtitle and cards appear one after another. */
+/* ============ SCROLL REVEAL ============ */
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
