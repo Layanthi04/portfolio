@@ -113,6 +113,35 @@ const observer = new IntersectionObserver(
 sections.forEach((section) => observer.observe(section));
 
 
+/* ============ CV MENU ============ */
+const cvMenu = document.getElementById("cvMenu");
+const cvToggle = document.getElementById("cvToggle");
+
+function setCvMenu(open) {
+  cvMenu.classList.toggle("open", open);
+  cvToggle.setAttribute("aria-expanded", String(open));
+}
+
+cvToggle.addEventListener("click", () => {
+  setCvMenu(!cvMenu.classList.contains("open"));
+});
+
+cvMenu.querySelectorAll(".cv-options a").forEach((link) => {
+  link.addEventListener("click", () => setCvMenu(false));
+});
+
+document.addEventListener("click", (e) => {
+  if (!cvMenu.contains(e.target)) setCvMenu(false);
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && cvMenu.classList.contains("open")) {
+    setCvMenu(false);
+    cvToggle.focus();
+  }
+});
+
+
 /* ============ HERO: TYPING ANIMATION ============ */
 const typedEl = document.getElementById("typed");
 const titles = [
