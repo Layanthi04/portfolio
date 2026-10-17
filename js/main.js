@@ -182,11 +182,7 @@ function typeLoop() {
   setTimeout(typeLoop, DELETE_SPEED);
 }
 
-if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  typedEl.textContent = titles[0];
-} else {
-  typeLoop();
-}
+typeLoop();
 
 
 /* ============ HERO: PROFILE PHOTO ============ */
