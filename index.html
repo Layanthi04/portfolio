@@ -977,6 +977,87 @@
             </article>
           </div>
 
+
+          <!-- CAESAR CIPHER -->
+          <div class="project-item reveal" style="--d:220ms">
+            <article class="project-card">
+              <button type="button" class="project-open" aria-haspopup="dialog">
+                <span class="project-media">
+                  <img src="assets/images/projects/caesar_cipher/caesar_cipher_cover.jpg" alt="Caesar Cipher encryption tool preview" width="800" height="500" loading="lazy" />
+                  <span class="project-fallback" aria-hidden="true">
+                    <svg class="thumb-icon"><use href="#i-code"/></svg>
+                    Project preview coming soon
+                  </span>
+                  <span class="project-view" aria-hidden="true"><b>View Project</b></span>
+                </span>
+                <span class="project-info">
+                  <span class="project-name">Caesar Cipher</span>
+                  <span class="project-sub">Python &amp; Web Encryption Tool</span>
+                </span>
+              </button>
+
+              <div class="project-detail" hidden>
+                <div data-part="overview">
+                  <p>Caesar Cipher is a text encryption and decryption tool that shifts every letter by a chosen number and turns it back again. I built the same idea twice: as a Python command-line program and as a browser app with a clean, dark, easy-to-use interface.</p>
+                </div>
+
+                <ul data-part="features">
+                  <li>Encrypt and decrypt text with a shift value</li>
+                  <li>Alphabet wraps around, so Z shifts back to A</li>
+                  <li>Works with negative shifts</li>
+                  <li>Keeps upper and lower case; spaces, numbers and symbols stay unchanged</li>
+                  <li>Two versions: Python console and web browser</li>
+                  <li>“Hello, World!” becomes “Khoor, Zruog!” with shift 3</li>
+                </ul>
+
+                <div data-part="contribution" data-title="What I did">
+                  <div class="pc-group pc-qa">
+                    <h5>QA &amp; Testing</h5>
+                    <ul>
+                      <li>Round-trip testing: encrypt then decrypt returns the original text</li>
+                      <li>Edge-case testing: wrap-around (Z to A) and negative shifts</li>
+                      <li>Input handling checks for spaces, numbers, symbols and mixed case</li>
+                      <li>Expected vs actual results using known examples</li>
+                      <li>Checked that the Python and web versions give the same output</li>
+                    </ul>
+                  </div>
+                  <div class="pc-group">
+                    <h5>UI/UX</h5>
+                    <ul>
+                      <li>Dark, GitHub-style interface with a centred card</li>
+                      <li>Clear flow: text, shift, Encrypt or Decrypt, result</li>
+                      <li>Read-only output box so the result can’t be edited by mistake</li>
+                      <li>Button hover feedback, rounded corners and soft shadows</li>
+                    </ul>
+                  </div>
+                  <div class="pc-group">
+                    <h5>Python &amp; Development</h5>
+                    <ul>
+                      <li>Python functions, loops, conditionals and string handling</li>
+                      <li>ord(), chr() and modulo (%) to shift letters safely</li>
+                      <li>Decrypt reuses encrypt with the opposite shift, so the logic is written once</li>
+                      <li>Same logic rebuilt in JavaScript with DOM events</li>
+                      <li>Basic security concepts: plaintext, ciphertext, keys and symmetric encryption</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <ul data-part="tech">
+                  <li>Python</li>
+                  <li>JavaScript</li>
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>VS Code</li>
+                  <li>GitHub</li>
+                </ul>
+
+                <ul data-part="links">
+                  <li><a href="#" data-icon="github">GitHub</a></li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
         </div>
       </div>
     </section>
